@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker https://www.codeandweb.com/texturepacker -->
+<!-- $TexturePacker:SmartUpdate:eee0f28f4d24f346485b92520484849f:42f0a00608ad2bfe7023dce7ac1bb8a0:d9eb143b6e55663078e0eac9c87bd0e4$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="good_layer_ui_res.png" width="512" height="1024">
+    <sprite n="bag_bg.png" x="2" y="221" w="367" h="437"/>
+    <sprite n="bag_item_bg.png" x="2" y="159" w="300" h="50"/>
+    <sprite n="bag_item_selected.png" x="170" y="111" w="292" h="46"/>
+    <sprite n="bag_title_txt1.png" x="2" y="70" w="142" h="36"/>
+    <sprite n="bag_title_txt2.png" x="359" y="32" w="142" h="36"/>
+    <sprite n="bag_title_txt3.png" x="71" y="32" w="142" h="36"/>
+    <sprite n="bag_title_txt4.png" x="215" y="32" w="142" h="36"/>
+    <sprite n="buy_text.png" x="438" y="70" w="40" h="39"/>
+    <sprite n="common-font.png" x="172" y="2" w="160" h="24"/>
+    <sprite n="equip_text.png" x="2" y="111" w="40" h="39"/>
+    <sprite n="name_text.png" x="86" y="111" w="40" h="39"/>
+    <sprite n="next_page_text.png" x="376" y="70" w="60" h="39"/>
+    <sprite n="number_text.png" x="44" y="111" w="40" h="39"/>
+    <sprite n="plant_text.png" x="334" y="70" w="40" h="39"/>
+    <sprite n="pre_page_text.png" x="146" y="70" w="60" h="39"/>
+    <sprite n="sbt4_1.png" x="334" y="2" w="67" h="28"/>
+    <sprite n="sbt4_2.png" x="2" y="32" w="67" h="28"/>
+    <sprite n="sbt4_3.png" x="403" y="2" w="67" h="28"/>
+    <sprite n="sbt6_1.png" x="304" y="159" w="60" h="60"/>
+    <sprite n="sbt6_2.png" x="366" y="159" w="60" h="60"/>
+    <sprite n="sell_text.png" x="292" y="70" w="40" h="39"/>
+    <sprite n="TextAtlas.png" x="2" y="2" w="168" h="18"/>
+    <sprite n="unequip_text.png" x="250" y="70" w="40" h="39"/>
+    <sprite n="use_text.png" x="208" y="70" w="40" h="39"/>
+    <sprite n="worth_text.png" x="128" y="111" w="40" h="39"/>
+</TextureAtlas>

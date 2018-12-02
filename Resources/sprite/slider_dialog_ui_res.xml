@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker https://www.codeandweb.com/texturepacker -->
+<!-- $TexturePacker:SmartUpdate:5955594ad381ec21fdad471168efa6f1:bf4a0306b5532f252fd31a409234ab52:31a22bca777ebc7f1461ff9f5d2472f9$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="slider_dialog_ui_res.png" width="482" height="226">
+    <sprite n="bt6_1.png" x="0" y="0" w="20" h="20"/>
+    <sprite n="bt6_2.png" x="20" y="0" w="20" h="20"/>
+    <sprite n="buy_text.png" x="438" y="0" w="40" h="39"/>
+    <sprite n="cancel_text.png" x="40" y="39" w="40" h="39"/>
+    <sprite n="common-font.png" x="40" y="0" w="160" h="24"/>
+    <sprite n="dialog_bg.png" x="120" y="39" w="362" h="187"/>
+    <sprite n="farm_ui_star.png" x="401" y="0" w="37" h="35"/>
+    <sprite n="ok_text.png" x="80" y="39" w="40" h="39"/>
+    <sprite n="sbt4_1.png" x="334" y="0" w="67" h="28"/>
+    <sprite n="sbt4_2.png" x="200" y="0" w="67" h="28"/>
+    <sprite n="sbt4_3.png" x="267" y="0" w="67" h="28"/>
+    <sprite n="sell_text.png" x="0" y="39" w="40" h="39"/>
+</TextureAtlas>

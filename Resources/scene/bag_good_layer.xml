@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Layer anchor-point="0.5,0.5" position="480,320" name="bag_good_layer" size="366,436">
+	<!--背包bg-->
+	<Sprite anchor-point="0.5,0.5" name="bag_bg" position="183,218">
+		<properties>
+			<property name="filename" value="bag_bg.png"/>
+			<property name="res-type" value="XML"/>
+		</properties>
+	</Sprite>
+	<!--标题文本-->
+	<Sprite anchor-point="0.5,0.5" name="title_text" position="183,24">
+		<properties>
+			<property name="filename" value="bag_title_txt1.png"/>
+			<property name="res-type" value="XML"/>
+		</properties>
+	</Sprite>
+	<!--关闭按钮-->
+	<Button position="347,25" name="close_btn">
+		<properties>
+			<property name="normal-image" value="sbt6_1.png"/>
+			<property name="selected-image" value="sbt6_2.png"/>
+			<property name="res-type" value="XML"/>
+			<property name="priority" value="-2"/>
+		</properties>
+	</Button>
+	<!--物品描述文本-->
+	<LabelBMFont position="38,258"  anchor-point="0,0" name="good_desc_label">
+		<properties>
+			<property name="text" value="无"/>
+			<property name="font-path" value="fonts/1.fnt"/>
+			<property name="font-color" value="255,255,255"/>
+			<property name="width" value="300"/>
+		</properties>
+	</LabelBMFont>
+	<!--上一页-->
+	<Button position="78,358" name="pre_page_btn">
+		<properties>
+			<property name="normal-image" value="sbt4_1.png"/>
+			<property name="selected-image" value="sbt4_2.png"/>
+			<property name="disabled-image" value="sbt4_3.png"/>
+			<property name="res-type" value="XML"/>
+			<property name="priority" value="-2"/>
+		</properties>
+		<Sprite position="33,16">
+			<properties>
+				<property name="filename" value="pre_page_text.png"/>
+				<property name="res-type" value="XML"/>
+			</properties>
+		</Sprite>
+	</Button>
+	<!--下一页-->
+	<Button position="148,358" name="next_page_btn">
+		<properties>
+			<property name="normal-image" value="sbt4_1.png"/>
+			<property name="selected-image" value="sbt4_2.png"/>
+			<property name="disabled-image" value="sbt4_3.png"/>
+			<property name="res-type" value="XML"/>
+			<property name="priority" value="-2"/>
+		</properties>
+		<Sprite position="33,16">
+			<properties>
+				<property name="filename" value="next_page_text.png"/>
+				<property name="res-type" value="XML"/>
+			</properties>
+		</Sprite>
+	</Button>
+	<!--使用-->
+	<Button position="218,358" name="use_btn">
+		<properties>
+			<property name="normal-image" value="sbt4_1.png"/>
+			<property name="selected-image" value="sbt4_2.png"/>
+			<property name="disabled-image" value="sbt4_3.png"/>
+			<property name="res-type" value="XML"/>
+			<property name="priority" value="-2"/>
+		</properties>
+		<Sprite position="33,16" name="sprite">
+			<properties>
+				<property name="filename" value="use_text.png"/>
+				<property name="res-type" value="XML"/>
+			</properties>
+		</Sprite>
+	</Button>
+	<!--装备-->
+	<Button position="288,358" name="equip_btn">
+		<properties>
+			<property name="normal-image" value="sbt4_1.png"/>
+			<property name="selected-image" value="sbt4_2.png"/>
+			<property name="disabled-image" value="sbt4_3.png"/>
+			<property name="res-type" value="XML"/>
+			<property name="priority" value="-2"/>
+		</properties>
+		<Sprite position="33,16" name="sprite">
+			<properties>
+				<property name="filename" value="equip_text.png"/>
+				<property name="res-type" value="XML"/>
+			</properties>
+		</Sprite>
+	</Button>
+	<!--当前页数/总页数-->
+	<LabelAtlas position="78,388" name="page_label">
+		<properties>
+			<property name="text" value="1/1"/>
+			<property name="filename" value="TextAtlas.png"/>
+			<property name="item-width" value="14"/>
+			<property name="item-height" value="18"/>
+			<property name="start-char" value="46"/>
+		</properties>
+	</LabelAtlas>
+	<!--显示金币-->
+	<LabelAtlas position="198,395" anchor-point="0.5,0.5" name="gold_label">
+		<properties>
+			<property name="text" value="0"/>
+			<property name="filename" value="common-font.png"/>
+			<property name="item-width" value="16"/>
+			<property name="item-height" value="24"/>
+			<property name="start-char" value="48"/>
+		</properties>
+	</LabelAtlas>
+	<!--物品名称-->
+	<Sprite position="88,48" name="name">
+		<properties>
+			<property name="filename" value="name_text.png"/>
+			<property name="res-type" value="XML"/>
+		</properties>
+	</Sprite>
+	<!--价格 标签-->
+	<Sprite position="188,48" name="worth">
+		<properties>
+			<property name="filename" value="worth_text.png"/>
+			<property name="res-type" value="XML"/>
+		</properties>
+	</Sprite>
+	<!--个数 标签-->
+	<Sprite position="288,48" name="number">
+		<properties>
+			<property name="filename" value="number_text.png"/>
+			<property name="res-type" value="XML"/>
+		</properties>
+	</Sprite>
+	<!--商品列表-->
+	<Xml name="bag_good_list" position="40,55">
+		<properties>
+			<property name="filename" value="scene/bag_good_list.xml"/>
+		</properties>
+	</Xml>
+</Layer>

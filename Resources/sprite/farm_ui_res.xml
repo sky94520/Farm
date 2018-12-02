@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker https://www.codeandweb.com/texturepacker -->
+<!-- $TexturePacker:SmartUpdate:ba8772cf5fbfee32b86fa69004666b9b:c929f68953efa26ab3d3df42633a83d2:7d076405396452a0682552cf8bb3f5f7$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="farm_ui_res.png" width="512" height="512">
+    <sprite n="bt6_1.png" x="133" y="2" w="20" h="20"/>
+    <sprite n="bt6_2.png" x="155" y="2" w="20" h="20"/>
+    <sprite n="farm_harvest_all.png" x="246" y="39" w="75" h="60"/>
+    <sprite n="farm_ui_bar.png" x="41" y="39" w="203" h="35"/>
+    <sprite n="farm_ui_bar_bg.png" x="286" y="2" w="203" h="35"/>
+    <sprite n="farm_ui_bg.png" x="166" y="121" w="91" h="91"/>
+    <sprite n="farm_ui_harvest.png" x="2" y="121" w="80" h="80"/>
+    <sprite n="farm_ui_ripe.png" x="177" y="2" w="107" h="35"/>
+    <sprite n="farm_ui_shop.png" x="84" y="121" w="80" h="82"/>
+    <sprite n="farm_ui_shovel.png" x="405" y="39" w="80" h="80"/>
+    <sprite n="farm_ui_star.png" x="2" y="39" w="37" h="35"/>
+    <sprite n="farm_ui_tag_bg.png" x="228" y="243" w="250" h="154"/>
+    <sprite n="farm_ui_tag_bg2.png" x="259" y="121" w="100" h="97"/>
+    <sprite n="farm_ui_warehouse.png" x="323" y="39" w="80" h="80"/>
+    <sprite n="fm_s2.png" x="2" y="2" w="129" h="17"/>
+    <sprite n="save_d.png" x="2" y="243" w="111" h="120"/>
+    <sprite n="save_h.png" x="361" y="121" w="111" h="120"/>
+    <sprite n="save_n.png" x="115" y="243" w="111" h="120"/>
+</TextureAtlas>

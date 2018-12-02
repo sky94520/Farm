@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Layer anchor-point="0,0">
+	<!--商店按钮-->
+	<Button position="200,100" name="shop_btn">
+		<properties>
+			<property name="normal-image" value="farm_ui_shop.png"/>
+			<property name="res-type" value="XML"/>
+		</properties>
+	</Button>
+	<!--仓库按钮-->
+	<Button position="300,140" name="warehouse_btn">
+		<properties>
+			<property name="normal-image" value="farm_ui_warehouse.png"/>
+			<property name="res-type" value="XML"/>
+		</properties>
+	</Button>
+	<!--标签背景-->
+	<Sprite position="500,100" name="tag_bg">
+		<properties>
+			<properties name="filename" value="farm_ui_tag_bg.png"/>
+			<properties name="res-type" value="XML"/>
+		</properties>
+		<!--金币-->
+		<LabelBMFont position="40,40" anchor-point="0,0.5">
+			<properties>
+				<property name="text" value="金币："/>
+				<property name="font-path" value="fonts/1.fnt"/>
+			</properties>
+		</LabelBMFont>
+		<LabelAtlas position="145,40" name="gold">
+			<properties>
+				<property name="text" value="100000"/>
+				<property name="filename" value="common-font.png"/>
+				<property name="item-width" value="16"/>
+				<property name="item-height" value="24"/>
+				<property name="start-char" value="48"/>
+			</properties>
+		</LabelAtlas>
+		<!--等级-->
+		<LabelBMFont position="40,70" anchor-point="0,0.5">
+			<properties>
+				<property name="text" value="等级"/>
+				<property name="font-path" value="fonts/1.fnt"/>
+			</properties>
+		</LabelBMFont>
+		<LabelAtlas position="145,70" name="level">
+			<properties>
+				<property name="text" value="1"/>
+				<property name="filename" value="common-font.png"/>
+				<property name="item-width" value="16"/>
+				<property name="item-height" value="24"/>
+				<property name="start-char" value="48"/>
+			</properties>
+		</LabelAtlas>
+		<!--经验-->
+		<LabelBMFont position="40,100" anchor-point="0,0.5">
+			<properties>
+				<property name="text" value="经验"/>
+				<property name="font-path" value="fonts/1.fnt"/>
+			</properties>
+		</LabelBMFont>
+		<!--进度条-->
+		<ProgressTimer position="145,100" name="exp_progress">
+			<properties>
+				<property name="filename" value="fm_s2.png"/>
+				<property name="res-type" value="XML"/>
+				<property name="type" value="BAR"/>
+				<property name="percentage" value="100"/>
+				<property name="midpoint" value="0,0"/>
+				<property name="bar-change-rate" value="1,0"/>
+			</properties>
+		</ProgressTimer>
+		<LabelAtlas position="145,100" name="exp">
+			<properties>
+				<property name="text" value="0/100"/>
+				<property name="filename" value="TextAtlas.png"/>
+				<property name="item-width" value="14"/>
+				<property name="item-height" value="18"/>
+				<property name="start-char" value="46"/>
+			</properties>
+		</LabelAtlas>
+	</Sprite>
+	<!--存档按钮-->
+	<Button position="905,320" name="save_btn">
+		<properties>
+			<property name="normal-image" value="save_n.png"/>
+			<property name="selected-image" value="save_h.png"/>
+			<property name="disabled-image" value="save_d.png"/>
+			<property name="res-type" value="XML"/>
+		</properties>
+	</Button>
+</Layer>

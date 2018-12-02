@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Node position="0,0">
+	<!---物品-->
+	<!--0-->
+	<RadioButton position="150,25" name="good_btn0">
+		<properties>
+			<property name="background" value="bag_item_bg.png"/>
+			<property name="cross" value="bag_item_selected.png"/>
+			<property name="res-type" value="XML"/>
+			<property name="priority" value="-2"/>
+		</properties>
+		<Sprite anchor-point="0,0.6" position="0,30" name="icon">
+			<properties>
+				<property name="filename" value="crop_101.png"/>
+				<property name="res-type" value="XML"/>
+			</properties>
+		</Sprite>
+		<LabelBMFont position="30,25"  anchor-point="0,0.4" name="name">
+			<properties>
+				<property name="text" value="1"/>
+				<property name="font-path" value="fonts/1.fnt"/>
+				<property name="font-color" value="0,0,0"/>
+			</properties>
+		</LabelBMFont>
+		<LabelAtlas position="130,25" anchor-point="0,0.5" name="cost">
+			<properties>
+				<property name="text" value="200"/>
+				<property name="filename" value="common-font.png"/>
+				<property name="item-width" value="16"/>
+				<property name="item-height" value="24"/>
+				<property name="start-char" value="48"/>
+			</properties>
+		</LabelAtlas>
+		<LabelAtlas position="230,25" anchor-point="0,0.5" name="number">
+			<properties>
+				<property name="text" value="200"/>
+				<property name="filename" value="common-font.png"/>
+				<property name="item-width" value="16"/>
+				<property name="item-height" value="24"/>
+				<property name="start-char" value="48"/>
+			</properties>
+		</LabelAtlas>
+	</RadioButton>
+	<!--1-->
+	<RadioButton position="150,75" name="good_btn1">
+		<properties>
+			<property name="background" value="bag_item_bg.png"/>
+			<property name="cross" value="bag_item_selected.png"/>
+			<property name="res-type" value="XML"/>
+			<property name="priority" value="-2"/>
+		</properties>
+		<Sprite anchor-point="0,0.6" position="0,30" name="icon">
+			<properties>
+				<property name="filename" value="crop_101.png"/>
+				<property name="res-type" value="XML"/>
+			</properties>
+		</Sprite>
+		<LabelBMFont position="30,25"  anchor-point="0,0.4" name="name">
+			<properties>
+				<property name="text" value="1"/>
+				<property name="font-path" value="fonts/1.fnt"/>
+				<property name="font-color" value="0,0,0"/>
+			</properties>
+		</LabelBMFont>
+		<LabelAtlas position="130,25" anchor-point="0,0.5" name="cost">
+			<properties>
+				<property name="text" value="200"/>
+				<property name="filename" value="common-font.png"/>
+				<property name="item-width" value="16"/>
+				<property name="item-height" value="24"/>
+				<property name="start-char" value="48"/>
+			</properties>
+		</LabelAtlas>
+		<LabelAtlas position="230,25" anchor-point="0,0.5" name="number">
+			<properties>
+				<property name="text" value="200"/>
+				<property name="filename" value="common-font.png"/>
+				<property name="item-width" value="16"/>
+				<property name="item-height" value="24"/>
+				<property name="start-char" value="48"/>
+			</properties>
+		</LabelAtlas>
+	</RadioButton>
+	<!--2-->
+	<RadioButton position="150,125" name="good_btn2">
+		<properties>
+			<property name="background" value="bag_item_bg.png"/>
+			<property name="cross" value="bag_item_selected.png"/>
+			<property name="res-type" value="XML"/>
+			<property name="priority" value="-2"/>
+		</properties>
+		<Sprite anchor-point="0,0.6" position="0,30" name="icon">
+			<properties>
+				<property name="filename" value="crop_101.png"/>
+				<property name="res-type" value="XML"/>
+			</properties>
+		</Sprite>
+		<LabelBMFont position="30,25"  anchor-point="0,0.4" name="name">
+			<properties>
+				<property name="text" value="1"/>
+				<property name="font-path" value="fonts/1.fnt"/>
+				<property name="font-color" value="0,0,0"/>
+			</properties>
+		</LabelBMFont>
+		<LabelAtlas position="130,25" anchor-point="0,0.5" name="cost">
+			<properties>
+				<property name="text" value="200"/>
+				<property name="filename" value="common-font.png"/>
+				<property name="item-width" value="16"/>
+				<property name="item-height" value="24"/>
+				<property name="start-char" value="48"/>
+			</properties>
+		</LabelAtlas>
+		<LabelAtlas position="230,25" anchor-point="0,0.5" name="number">
+			<properties>
+				<property name="text" value="200"/>
+				<property name="filename" value="common-font.png"/>
+				<property name="item-width" value="16"/>
+				<property name="item-height" value="24"/>
+				<property name="start-char" value="48"/>
+			</properties>
+		</LabelAtlas>
+	</RadioButton>
+	<!--3-->
+	<RadioButton position="150,175" name="good_btn3">
+		<properties>
+			<property name="background" value="bag_item_bg.png"/>
+			<property name="cross" value="bag_item_selected.png"/>
+			<property name="res-type" value="XML"/>
+			<property name="priority" value="-2"/>
+		</properties>
+		<Sprite anchor-point="0,0.6" position="0,30" name="icon">
+			<properties>
+				<property name="filename" value="crop_101.png"/>
+				<property name="res-type" value="XML"/>
+			</properties>
+		</Sprite>
+		<LabelBMFont position="30,25"  anchor-point="0,0.4" name="name">
+			<properties>
+				<property name="text" value="1"/>
+				<property name="font-path" value="fonts/1.fnt"/>
+				<property name="font-color" value="0,0,0"/>
+			</properties>
+		</LabelBMFont>
+		<LabelAtlas position="130,25" anchor-point="0,0.5" name="cost">
+			<properties>
+				<property name="text" value="200"/>
+				<property name="filename" value="common-font.png"/>
+				<property name="item-width" value="16"/>
+				<property name="item-height" value="24"/>
+				<property name="start-char" value="48"/>
+			</properties>
+		</LabelAtlas>
+		<LabelAtlas position="230,25" anchor-point="0,0.5" name="number">
+			<properties>
+				<property name="text" value="200"/>
+				<property name="filename" value="common-font.png"/>
+				<property name="item-width" value="16"/>
+				<property name="item-height" value="24"/>
+				<property name="start-char" value="48"/>
+			</properties>
+		</LabelAtlas>
+	</RadioButton>
+</Node>

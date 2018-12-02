@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Layer anchor-point="0.5,0.5" size="250,100">
+<!--背景-->
+	<Scale9Sprite opacity="220" position="125,35" anchor-point="0.5,0.5" name="bg">
+		<properties>
+			<property name="filename" value="farm_ui_bg.png"/>
+			<property name="res-type" value="XML"/>
+			<property name="cap-insets" value="15,15,60,60"/>
+			<property name="preferred-size" value="250,100"/>
+		</properties>
+	</Scale9Sprite>
+	<!--作物果实贴图-->
+	<Sprite position="100,10" name="fruit_sprite">
+		<properties>
+			<property name="filename" value="crop_101.png"/>
+			<property name="res-type" value="XML"/>
+		</properties>
+	</Sprite>
+	<!--作物名称-->
+	<LabelBMFont position="125,10"  name="name_label">
+		<properties>
+			<property name="font-path" value="fonts/1.fnt" />
+			<property name="text" value="白萝卜[第1/1季]" />
+			<property name="font-color" value="198,173,130"/>
+		</properties>
+	</LabelBMFont>
+	<!--进度条-->
+	<ProgressTimer position="125,45" name="time_progress">
+		<properties>
+			<property name="filename" value="farm_ui_bar.png"/>
+			<property name="res-type" value="XML"/>
+			<property name="type" value="BAR"/>
+			<property name="percentage" value="40"/>
+			<property name="midpoint" value="0,0"/>
+			<property name="bar-change-rate" value="1,0"/>
+		</properties>
+	</ProgressTimer>
+	<!--进度条背景-->
+	<Sprite position="125,45">
+		<properties>
+			<property name="filename" value="farm_ui_bar_bg.png"/>
+			<property name="res-type" value="XML"/>
+		</properties>
+	</Sprite>
+	<!--作物成熟时间-->
+	<LabelBMFont position="125,75" name="ripe_label">
+		<properties>
+			<property name="font-path" value="fonts/1.fnt" />
+			<property name="text" value="10小时5分钟30秒后成熟" />
+			<property name="font-color" value="198,173,130"/>
+		</properties>
+	</LabelBMFont>
+</Layer>

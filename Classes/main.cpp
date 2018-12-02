@@ -1,5 +1,5 @@
 #include "SDL_Engine/SDL_Engine.h"
-#include "HelloWorldScene.h"
+#include "FarmScene.h"
 
 using namespace std;
 using namespace SDL;
@@ -28,7 +28,7 @@ int main(int argv,char**argc)
 		SDL_SetHint(SDL_HINT_RENDER_VSYNC, "1");
 
 		//第一个启动场景
-		Director::getInstance()->runWithScene(HelloWorld::createScene());
+		Director::getInstance()->runWithScene(FarmScene::create());
 		Director::getInstance()->setDisplayStates(true);
 		Director::getInstance()->setSecondsPerFrame(1/60.f);
 		Director::getInstance()->setResolutionScale();
