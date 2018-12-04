@@ -1,6 +1,7 @@
 #include "FarmScene.h"
 #include "SoilLayer.h"
 #include "Soil.h"
+#include "Crop.h"
 
 FarmScene::FarmScene()
 	:m_pSoilLayer(nullptr)
@@ -60,10 +61,25 @@ bool FarmScene::preloadResources()
 
 void FarmScene::initializeSoilsAndCrops()
 {
+	//test
 	int soilIDs[] = {12, 13, 14, 15, 16, 17};
+	auto currTime = time(NULL);
 
 	for (int i = 0; i < 6; i++)
 	{
 		auto soil = m_pSoilLayer->addSoil(soilIDs[i], 1);
+
+		int id = 101 + i;
+		auto startTime = currTime - i * 3600;
+		int harvestCount = 0;
+		float rate = 0.f;
+
+		auto crop = Crop::create(id, startTime, harvestCount, rate);
+		crop->setPosition(soil->getPosition());
+		crop->setSoil(soil);
+
+		this->addChild(crop);
+		soil->setCrop(crop);
+
 	}
 }
