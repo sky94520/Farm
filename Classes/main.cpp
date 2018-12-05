@@ -7,7 +7,7 @@ using namespace SDL;
 int main(int argv,char**argc)
 {
 	//窗口创建成功
-	if(Director::getInstance()->init("RPG",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,960,640,SDL_WINDOW_SHOWN))
+	if(Director::getInstance()->init("Farm02",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,960,640,SDL_WINDOW_SHOWN))
 	{
 		std::string platform = Director::getInstance()->getPlatform();
 

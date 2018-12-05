@@ -1,10 +1,12 @@
 #include "FarmScene.h"
 #include "SoilLayer.h"
+#include "CropLayer.h"
 #include "Soil.h"
 #include "Crop.h"
 
 FarmScene::FarmScene()
 	:m_pSoilLayer(nullptr)
+	,m_pCropLayer(nullptr)
 {
 }
 
@@ -18,8 +20,12 @@ bool FarmScene::init()
 
 	this->preloadResources();
 
+	//创建土壤层
 	m_pSoilLayer = SoilLayer::create();
 	this->addChild(m_pSoilLayer);
+	//创建作物层
+	m_pCropLayer = CropLayer::create();
+	this->addChild(m_pCropLayer);
 
 	//初始化土壤和作物
 	this->initializeSoilsAndCrops();
@@ -74,12 +80,10 @@ void FarmScene::initializeSoilsAndCrops()
 		int harvestCount = 0;
 		float rate = 0.f;
 
-		auto crop = Crop::create(id, startTime, harvestCount, rate);
+		auto crop = m_pCropLayer->addCrop(id, startTime, harvestCount, rate);
 		crop->setPosition(soil->getPosition());
 		crop->setSoil(soil);
 
-		this->addChild(crop);
 		soil->setCrop(crop);
-
 	}
 }

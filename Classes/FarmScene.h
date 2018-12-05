@@ -6,6 +6,7 @@
 USING_NS_SDL;
 
 class SoilLayer;
+class CropLayer;
 
 class FarmScene : public Scene
 {
@@ -24,5 +25,6 @@ private:
 	void initializeSoilsAndCrops();
 private:
 	SoilLayer* m_pSoilLayer;
+	CropLayer* m_pCropLayer;
 };
 #endif
