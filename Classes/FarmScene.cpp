@@ -3,6 +3,8 @@
 #include "CropLayer.h"
 #include "Soil.h"
 #include "Crop.h"
+#include "DynamicData.h"
+#include "StaticData.h"
 
 FarmScene::FarmScene()
 	:m_pSoilLayer(nullptr)
@@ -67,23 +69,49 @@ bool FarmScene::preloadResources()
 
 void FarmScene::initializeSoilsAndCrops()
 {
-	//test
-	int soilIDs[] = {12, 13, 14, 15, 16, 17};
-	auto currTime = time(NULL);
+	//读取存档
+	auto& farmValueVec = DynamicData::getInstance()->getValueOfKey("soils")->asValueVector();
 
-	for (int i = 0; i < 6; i++)
+	for (auto& value : farmValueVec)
 	{
-		auto soil = m_pSoilLayer->addSoil(soilIDs[i], 1);
-
-		int id = 101 + i;
-		auto startTime = currTime - i * 3600;
+		int soilID = 0;
+		int soilLv = 0;
+		int cropID = 0;
+		int startTime = 0;
 		int harvestCount = 0;
 		float rate = 0.f;
+		auto& valueMap = value.asValueMap();
 
-		auto crop = m_pCropLayer->addCrop(id, startTime, harvestCount, rate);
-		crop->setPosition(soil->getPosition());
+		for (auto it = valueMap.begin(); it != valueMap.end(); it++)
+		{
+			auto& name = it->first;
+			auto& value = it->second;
+
+			if (name == "soil_id")
+				soilID = value.asInt();
+			else if (name == "soil_lv")
+				soilLv = value.asInt();
+			else if (name == "crop_id")
+				cropID = value.asInt();
+			else if (name == "crop_start")
+				startTime = value.asInt();
+			else if (name == "harvest_count")
+				harvestCount = value.asInt();
+			else if (name == "crop_rate")
+				rate = value.asFloat();
+		}
+		//生成土壤对象
+		Soil* soil = m_pSoilLayer->addSoil(soilID, soilLv);
+		//是否存在对应的作物ID
+		CropStruct* pCropSt = StaticData::getInstance()->getCropStructByID(cropID);
+
+		if (pCropSt == nullptr)
+			continue;
+		printf("cropID:%d\n", cropID);
+		Crop* crop = m_pCropLayer->addCrop(cropID, startTime, harvestCount, rate);
 		crop->setSoil(soil);
-
 		soil->setCrop(crop);
+		//设置位置
+		crop->setPosition(soil->getPosition());
 	}
 }

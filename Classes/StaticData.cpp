@@ -66,6 +66,7 @@ bool StaticData::loadCropConfigFile()
 				cropSt.exp = value.asInt(); 
 				//存入数据
 				m_cropMap.insert(make_pair(id, cropSt));
+				cropSt.growns.clear();
 				break;
 			}
 		}
