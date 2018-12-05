@@ -68,7 +68,7 @@
    <key>gold</key>
    <integer>50</integer>
    <!--当前可扩展土地-->
-   <key>expandable_soil</key>
+   <key>extensible_soil</key>
    <integer>11</integer>
    <!--商店出售种子列表-->
    <key>seed_shop_list</key>

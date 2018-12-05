@@ -39,6 +39,20 @@
     <string>果实</string>
     <key>seed_desc_format</key>
     <string>需求等级：%d   经验：%d  季数：%d   预计产量：%d</string>
+    
+    <key>extensible_text</key>
+    <string>扩建土地</string>
+    <key>extensible_format</key>
+    <string>扩建这块土地需要等级%d级和金币%d</string>
+    <key>not_enough_lv_text</key>
+    <string>你等级不够哦</string>
+    <key>not_enough_money_text</key>
+    <string>你没有足够的金钱哦</string>
+    <key>none_seed_text</key>
+    <string>选中的物品不是种子，无法种植哦</string>
+    <key>save_success_text</key>
+    <string>存档保存成功</string>
+
     <key>bag_good_list</key>
     <array></array>
   </dict>
