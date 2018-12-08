@@ -14,6 +14,15 @@
 			<property name="res-type" value="XML"/>
 		</properties>
 	</Button>
+	<!--存档按钮-->
+	<Button position="150,200" name="save_btn">
+		<properties>
+			<property name="normal-image" value="save_n.png"/>
+			<property name="selected-image" value="save_h.png"/>
+			<property name="disabled-image" value="save_d.png"/>
+			<property name="res-type" value="XML"/>
+		</properties>
+	</Button>
 	<!--标签背景-->
 	<Sprite position="500,100" name="tag_bg">
 		<properties>
@@ -80,13 +89,4 @@
 			</properties>
 		</LabelAtlas>
 	</Sprite>
-	<!--存档按钮-->
-	<Button position="905,320" name="save_btn">
-		<properties>
-			<property name="normal-image" value="save_n.png"/>
-			<property name="selected-image" value="save_h.png"/>
-			<property name="disabled-image" value="save_d.png"/>
-			<property name="res-type" value="XML"/>
-		</properties>
-	</Button>
 </Layer>
