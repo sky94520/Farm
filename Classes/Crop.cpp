@@ -119,6 +119,9 @@ void Crop::setSoil(Soil* soil)
 
 bool Crop::isRipe() const
 {
+	if (m_bWitherred)
+		return false;
+
 	auto pCropSt = StaticData::getInstance()->getCropStructByID(m_cropID);
 
 	return pCropSt->growns.back() <= m_hour;
