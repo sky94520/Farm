@@ -91,6 +91,15 @@ void FarmUILayer::showOperationBtns(Crop* crop)
 	SDL_SAFE_RETAIN(crop);
 	SDL_SAFE_RELEASE(m_pOperatingCrop);
 	m_pOperatingCrop = crop;
+	//先隐藏所有操作按钮
+	m_pHarvestItem->setVisible(false);
+	m_pHarvestItem->setEnabled(false);
+
+	m_pShovelItem->setVisible(false);
+	m_pShovelItem->setEnabled(false);
+
+	m_pFightItem->setVisible(false);
+	m_pFightItem->setEnabled(false);
 
 	this->setVisibleOfOperationBtns(true);
 	//显示作物信息
@@ -315,9 +324,9 @@ void FarmUILayer::setVisibleOfOperationBtns(bool visible)
 	//菜单按钮
 	vector<MenuItemSprite*> items;
 
+	items.push_back(m_pShovelItem);
 	if (m_pOperatingCrop->isRipe())
 		items.push_back(m_pHarvestItem);
-	items.push_back(m_pShovelItem);
 
 	m_pMenu->setEnabled(visible);
 
