@@ -10,6 +10,7 @@ FarmScene::FarmScene()
 	:m_pSoilLayer(nullptr)
 	,m_pCropLayer(nullptr)
 	,m_pFarmUILayer(nullptr)
+	,m_pGoodLayer(nullptr)
 {
 }
 
@@ -33,6 +34,13 @@ bool FarmScene::init()
 	m_pFarmUILayer = FarmUILayer::create();
 	m_pFarmUILayer->setDelegate(this);
 	this->addChild(m_pFarmUILayer);
+	//物品层
+	m_pGoodLayer = GoodLayer::create();
+	m_pGoodLayer->setDelegate(this);
+	//默认物品层不可显示
+	m_pGoodLayer->setPositionY(-visibleSize.height);
+	m_pGoodLayer->updateShowingBtn(BtnType::Equip, BtnParamSt(false, false));
+	this->addChild(m_pGoodLayer);
 
 	//初始化土壤和作物
 	this->initializeSoilsAndCrops();
@@ -50,8 +58,16 @@ bool FarmScene::init()
 	listener->onTouchBegan = SDL_CALLBACK_2(FarmScene::handleTouchEvent, this);
 
 	_eventDispatcher->addEventListener(listener, this);
+	//开始update函数
+	this->scheduleUpdate();
 
 	return true;
+}
+
+void FarmScene::update(float dt)
+{
+	m_pCropLayer->update(dt);
+	m_pFarmUILayer->update(dt);
 }
 
 bool FarmScene::handleTouchEvent(Touch* touch, SDL_Event* event)
@@ -138,16 +154,39 @@ void FarmScene::fightCrop(Crop* crop)
 
 void FarmScene::showWarehouse()
 {
+	this->setVisibleofGoodLayer(true);
 }
 
 void FarmScene::showShop()
 {
+	this->setVisibleofGoodLayer(true);
 }
 
 void FarmScene::saveData()
 {
 	DynamicData::getInstance()->save();
 	printf("save data success\n");
+}
+
+void FarmScene::pageBtnCallback(GoodLayer* goodLayer, int value)
+{
+}
+
+void FarmScene::useBtnCallback(GoodLayer* goodLayer)
+{
+}
+
+void FarmScene::equipBtnCallback(GoodLayer* goodLayer)
+{
+}
+
+void FarmScene::closeBtnCallback(GoodLayer* goodLayer)
+{
+	this->setVisibleofGoodLayer(false);
+}
+
+void FarmScene::selectGoodCallback(GoodLayer* goodLayer, GoodInterface* good)
+{
 }
 
 bool FarmScene::preloadResources()
@@ -210,6 +249,32 @@ void FarmScene::initializeSoilsAndCrops()
 		//设置位置
 		crop->setPosition(soil->getPosition());
 	}
+}
+
+void FarmScene::setVisibleofGoodLayer(bool visible)
+{
+	//动画tag
+	const int tag = 1;
+	//动作显示
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	ActionInterval* action = nullptr;
+	//出现
+	if (visible)
+	{
+		MoveTo* move = MoveTo::create(0.5f,Point(0, 0));
+		action = EaseExponentialOut::create(move);
+	}
+	else
+	{
+		MoveTo* move = MoveTo::create(0.5f,Point(0, -visibleSize.height));
+		action = EaseExponentialIn::create(move);
+	}
+	action->setTag(tag);
+	
+	m_pGoodLayer->setShowing(visible);
+	//停止原先动画并开始新动画
+	m_pGoodLayer->stopActionByTag(tag);
+	m_pGoodLayer->runAction(action);
 }
 
 Value FarmScene::getValueOfKey(const string& key)
