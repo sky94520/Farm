@@ -72,7 +72,7 @@ public:
 	 * @return 减少成功返回true,否则返回false
 	 */
 	bool subGood(Good* good, int number);
-	vector<Good*>& getBagGoodList() { return m_bagGoodList; }
+	vector<Good*>* getBagGoodList() { return &m_bagGoodList; }
 	//--------------------------数据库相关---------------------------
 	//获取数据
 	Value* getValueOfKey(const string& key);

@@ -5,17 +5,29 @@
 #include "Crop.h"
 #include "DynamicData.h"
 #include "StaticData.h"
+#include "Seed.h"
 
 FarmScene::FarmScene()
 	:m_pSoilLayer(nullptr)
 	,m_pCropLayer(nullptr)
 	,m_pFarmUILayer(nullptr)
 	,m_pGoodLayer(nullptr)
+	,m_nCurPage(0)
+	,m_goodLayerType(GoodLayerType::None)
+	,m_pSelectedSoil(nullptr)
+	,m_pSelectedGood(nullptr)
 {
 }
 
 FarmScene::~FarmScene()
 {
+	for (auto it = m_shopList.begin(); it != m_shopList.end(); it++)
+	{
+		auto good = *it;
+		SDL_SAFE_RELEASE(good);
+	}
+	m_shopList.clear();
+	SDL_SAFE_RELEASE_NULL(m_pSelectedGood);
 }
 
 bool FarmScene::init()
@@ -44,13 +56,18 @@ bool FarmScene::init()
 
 	//初始化土壤和作物
 	this->initializeSoilsAndCrops();
+	//初始化商店
+	this->initializeShopGoods();
 	//更新数据显示
 	int gold = this->getValueOfKey(GOLD_KEY).asInt();
 	int lv = this->getValueOfKey(FARM_LEVEL_KEY).asInt();
 	int exp = this->getValueOfKey(FARM_EXP_KEY).asInt();
 	int maxExp = DynamicData::getInstance()->getFarmExpByLv(lv);
 
+	//更新金币显示
 	m_pFarmUILayer->updateShowingGold(gold);
+	m_pGoodLayer->updateShowingGold(gold);
+
 	m_pFarmUILayer->updateShowingLv(lv);
 	m_pFarmUILayer->updateShowingExp(exp, maxExp);
 	//添加事件监听器
@@ -85,9 +102,14 @@ bool FarmScene::handleTouchEvent(Touch* touch, SDL_Event* event)
 	//获取土壤对应的作物
 	auto crop = soil->getCrop();
 
-	//未种植作物
+	//未种植作物,呼出背包
 	if (crop == nullptr)
 	{
+		m_pFarmUILayer->hideOperationBtns();
+		//记忆土壤
+		m_pSelectedSoil = soil;
+		//显示种子背包
+		this->showSeedBag();
 	}
 	else//存在作物，显示操作按钮
 	{
@@ -154,12 +176,27 @@ void FarmScene::fightCrop(Crop* crop)
 
 void FarmScene::showWarehouse()
 {
-	this->setVisibleofGoodLayer(true);
+	m_goodLayerType = GoodLayerType::Warehouse;
+	auto pBagGoodList = DynamicData::getInstance()->getBagGoodList();
+
+	this->showGoodLayer("bag_title_txt1.png", "sell_text.png", pBagGoodList, m_nCurPage);
 }
 
 void FarmScene::showShop()
 {
 	this->setVisibleofGoodLayer(true);
+	m_goodLayerType = GoodLayerType::Shop;
+	//填充商店物品
+	this->showGoodLayer("bag_title_txt1.png", "buy_text.png", &m_shopList, m_nCurPage);
+}
+
+void FarmScene::showSeedBag()
+{
+	//TODO:暂时显示的和背包相同
+	m_goodLayerType = GoodLayerType::SeedBag;
+	auto pBagGoodList = DynamicData::getInstance()->getBagGoodList();
+
+	this->showGoodLayer("bag_title_txt1.png", "plant_text.png", pBagGoodList, m_nCurPage);
 }
 
 void FarmScene::saveData()
@@ -170,10 +207,140 @@ void FarmScene::saveData()
 
 void FarmScene::pageBtnCallback(GoodLayer* goodLayer, int value)
 {
+	//总页码
+	int size = 0;
+
+	vector<Good*>* pBagGoodList = nullptr;
+
+	if (m_goodLayerType == GoodLayerType::Shop)
+		pBagGoodList = &m_shopList;
+	else if (m_goodLayerType == GoodLayerType::Warehouse)
+		pBagGoodList = DynamicData::getInstance()->getBagGoodList();
+	else if (m_goodLayerType == GoodLayerType::SeedBag)
+		pBagGoodList = DynamicData::getInstance()->getBagGoodList();
+
+	size = pBagGoodList->size();
+	int totalPage = size / 4;
+	if (size % 4 != 0)
+		totalPage += 1;
+
+	m_nCurPage += value;
+	//越界处理
+	if (m_nCurPage <= 0)
+		m_nCurPage = totalPage;
+	else if (m_nCurPage > totalPage)
+		m_nCurPage = 1;
+	//切片处理
+	vector<GoodInterface*> content;
+	for (int i = 0; i < 4; i++)
+	{
+		int index = (m_nCurPage - 1) * 4 + i;
+		
+		if (index >= size)
+			break;
+
+		content.push_back(pBagGoodList->at(index));
+	}
+
+	m_pGoodLayer->updateShowingPage(m_nCurPage, totalPage);
+	m_pGoodLayer->updateShowingGoods(content);
 }
 
 void FarmScene::useBtnCallback(GoodLayer* goodLayer)
 {
+	auto dynamicData = DynamicData::getInstance();
+	if (m_pSelectedGood == nullptr)
+	{
+		printf("m_pSelectedGood == nullptr\n");
+		return ;
+	}
+	//出售
+	if (m_goodLayerType == GoodLayerType::Warehouse)
+	{
+		//选中的物品的个数和价格
+		int number = m_pSelectedGood->getNumber();
+		int cost = m_pSelectedGood->getCost();
+		//当前拥有的金币
+		Value gold = this->getValueOfKey(GOLD_KEY);
+		//直接出售
+		gold = gold.asInt() + cost;
+		number--;
+
+		dynamicData->subGood(m_pSelectedGood, 1);
+		dynamicData->setValueOfKey(GOLD_KEY, gold);
+		//解除引用
+		if (number == 0)
+			SDL_SAFE_RELEASE_NULL(m_pSelectedGood);
+		//更新显示
+		auto pBagGoodList = dynamicData->getBagGoodList();
+		this->showGoodLayer("bag_title_txt1.png", "sell_text.png", pBagGoodList, m_nCurPage);
+		
+		m_pFarmUILayer->updateShowingGold(gold.asInt());
+		m_pGoodLayer->updateShowingGold(gold.asInt());
+	}
+	else if (m_goodLayerType == GoodLayerType::Shop)
+	{
+		//判断等级
+		string goodName = m_pSelectedGood->getGoodName();
+		int id = atoi(goodName.c_str());
+		auto pCropSt = StaticData::getInstance()->getCropStructByID(id);
+		auto lv = this->getValueOfKey(FARM_LEVEL_KEY).asInt();
+		
+		if (lv < pCropSt->level)
+		{
+			printf("you don't have enough level\n");
+			return ;
+		}
+		Value gold = this->getValueOfKey(GOLD_KEY);
+		int cost = m_pSelectedGood->getCost();
+		//一个都买不起，提示
+		if (cost > gold.asInt())
+		{
+			printf("You don't have enough money\n");
+			return ;
+		}
+		printf("buy the good success\n");
+		gold = gold.asInt() - cost;
+		//购买成功
+		dynamicData->setValueOfKey(GOLD_KEY, gold);
+		dynamicData->addGood(m_pSelectedGood->getGoodType(), goodName, 1);
+		//更新显示
+		m_pFarmUILayer->updateShowingGold(gold.asInt());
+		m_pGoodLayer->updateShowingGold(gold.asInt());
+	}
+	else if (m_goodLayerType == GoodLayerType::SeedBag)
+	{
+		//先判断类型是否合法
+		if (m_pSelectedGood->getGoodType() != GoodType::Seed)
+		{
+			printf("the selected good is not a seed\n");
+			return ;
+		}
+		//新建作物对象
+		int cropID = atoi(m_pSelectedGood->getGoodName().c_str());
+		int harvestCount = 1;
+		float rate = 0.f;
+
+		Crop* crop = m_pCropLayer->addCrop(cropID, time(NULL), harvestCount, rate);
+		crop->setSoil(m_pSelectedSoil);
+		m_pSelectedSoil->setCrop(crop);
+		//设置位置
+		crop->setPosition(m_pSelectedSoil->getPosition());
+		//保存当前的植物
+		dynamicData->updateCrop(crop);
+		int number = m_pSelectedGood->getNumber();
+		number--;
+		//减少物品
+		dynamicData->subGood(m_pSelectedGood, 1);
+		//解除引用，不解除亦可
+		if (number == 0)
+			SDL_SAFE_RELEASE_NULL(m_pSelectedGood);
+		//更新显示
+		auto pBagGoodList = DynamicData::getInstance()->getBagGoodList();
+		this->showGoodLayer("bag_title_txt1.png", "plant_text.png", pBagGoodList, m_nCurPage);
+		//关闭菜单
+		this->closeBtnCallback(m_pGoodLayer);
+	}
 }
 
 void FarmScene::equipBtnCallback(GoodLayer* goodLayer)
@@ -187,6 +354,12 @@ void FarmScene::closeBtnCallback(GoodLayer* goodLayer)
 
 void FarmScene::selectGoodCallback(GoodLayer* goodLayer, GoodInterface* good)
 {
+	auto selectedGood = static_cast<Good*>(good);
+	SDL_SAFE_RETAIN(selectedGood);
+	//设置当前选中物品
+	SDL_SAFE_RELEASE_NULL(m_pSelectedGood);
+	m_pSelectedGood = selectedGood;
+	printf("%p\n", m_pSelectedGood);
 }
 
 bool FarmScene::preloadResources()
@@ -251,6 +424,19 @@ void FarmScene::initializeSoilsAndCrops()
 	}
 }
 
+void FarmScene::initializeShopGoods()
+{
+	//初始化生成商店背包列表
+	string seed_shop_list = DynamicData::getInstance()->getValueOfKey("seed_shop_list")->asString();
+	auto callback = [this](int, Value value)
+	{
+		Seed* seed = Seed::create(value.asInt(), 10);
+		SDL_SAFE_RETAIN(seed);
+		m_shopList.push_back(seed);
+	};
+	StringUtils::split(seed_shop_list, ",", callback);
+}
+
 void FarmScene::setVisibleofGoodLayer(bool visible)
 {
 	//动画tag
@@ -275,6 +461,47 @@ void FarmScene::setVisibleofGoodLayer(bool visible)
 	//停止原先动画并开始新动画
 	m_pGoodLayer->stopActionByTag(tag);
 	m_pGoodLayer->runAction(action);
+}
+
+void FarmScene::showGoodLayer(const string& titleFrameName, const string& btnFrameName
+		, const vector<Good*>* vec, int curPage)
+{
+	this->setVisibleofGoodLayer(true);
+	//设置title
+	m_pGoodLayer->updateShowingTitle(titleFrameName);
+	//设置使用按钮
+	m_pGoodLayer->updateShowingBtn(BtnType::Use, BtnParamSt(true, true, btnFrameName));
+	//隐藏装备按钮
+	m_pGoodLayer->updateShowingBtn(BtnType::Equip, BtnParamSt(false, false));
+	//更新页码
+	int size = vec->size();
+	auto totalPage = size / 4;
+	if (size % 4 != 0)
+		totalPage += 1;
+
+	if (totalPage == 0)
+		totalPage = 1;
+
+	//保证页面合法
+	m_nCurPage = curPage;
+	if (m_nCurPage > totalPage)
+		m_nCurPage--;
+	if (m_nCurPage <= 0)
+		m_nCurPage = 1;
+	
+	//切片处理
+	vector<GoodInterface*> content;
+	for (int i = 0; i < 4; i++)
+	{
+		int index = (m_nCurPage - 1) * 4 + i;
+		
+		if (index >= size)
+			break;
+		content.push_back(vec->at(index));
+	}
+	m_pGoodLayer->updateShowingPage(m_nCurPage, totalPage);
+	//填充物品
+	m_pGoodLayer->updateShowingGoods(content);
 }
 
 Value FarmScene::getValueOfKey(const string& key)
