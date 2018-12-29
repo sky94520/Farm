@@ -14,6 +14,7 @@ class SoilLayer;
 class CropLayer;
 class Good;
 class Soil;
+class SliderDialog;
 
 /*物品层显示类型*/
 enum class GoodLayerType
@@ -54,6 +55,9 @@ public:
 	virtual void closeBtnCallback(GoodLayer* goodLayer);
 	virtual void selectGoodCallback(GoodLayer* goodLayer, GoodInterface* good);
 private:
+	//滑动条对话框回调函数
+	void sliderDialogCallback(bool ret, int percent);
+private:
 	bool preloadResources();
 	//初始化土壤和作物
 	void initializeSoilsAndCrops();
@@ -76,11 +80,15 @@ private:
 	SoilLayer* m_pSoilLayer;
 	CropLayer* m_pCropLayer;
 	FarmUILayer* m_pFarmUILayer;
+
 	GoodLayer* m_pGoodLayer;
 	//背包-当前页面
 	int m_nCurPage;
 	//背包层类型
 	GoodLayerType m_goodLayerType;
+	
+	//滑动条对话框
+	SliderDialog* m_pSliderDialog;
 	//当前选中的土壤
 	Soil* m_pSelectedSoil;
 	//当前选中的物品

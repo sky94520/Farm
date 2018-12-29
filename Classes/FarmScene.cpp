@@ -6,6 +6,7 @@
 #include "DynamicData.h"
 #include "StaticData.h"
 #include "Seed.h"
+#include "SliderDialog.h"
 
 FarmScene::FarmScene()
 	:m_pSoilLayer(nullptr)
@@ -14,6 +15,7 @@ FarmScene::FarmScene()
 	,m_pGoodLayer(nullptr)
 	,m_nCurPage(0)
 	,m_goodLayerType(GoodLayerType::None)
+	,m_pSliderDialog(nullptr)
 	,m_pSelectedSoil(nullptr)
 	,m_pSelectedGood(nullptr)
 {
@@ -53,6 +55,12 @@ bool FarmScene::init()
 	m_pGoodLayer->setPositionY(-visibleSize.height);
 	m_pGoodLayer->updateShowingBtn(BtnType::Equip, BtnParamSt(false, false));
 	this->addChild(m_pGoodLayer);
+	//滑动条对话框
+	m_pSliderDialog = SliderDialog::create();
+	m_pSliderDialog->setPosition(visibleSize.width * 0.5f, visibleSize.height * 0.5f);
+	m_pSliderDialog->setVisible(false);
+	m_pSliderDialog->setCallback(SDL_CALLBACK_2(FarmScene::sliderDialogCallback, this));
+	this->addChild(m_pSliderDialog);
 
 	//初始化土壤和作物
 	this->initializeSoilsAndCrops();
@@ -257,26 +265,17 @@ void FarmScene::useBtnCallback(GoodLayer* goodLayer)
 	//出售
 	if (m_goodLayerType == GoodLayerType::Warehouse)
 	{
-		//选中的物品的个数和价格
 		int number = m_pSelectedGood->getNumber();
-		int cost = m_pSelectedGood->getCost();
-		//当前拥有的金币
-		Value gold = this->getValueOfKey(GOLD_KEY);
-		//直接出售
-		gold = gold.asInt() + cost;
-		number--;
+		int gold = m_pSelectedGood->getCost();
+		//填充
+		m_pSliderDialog->setVisible(true);
+		m_pSliderDialog->setShowing(true);
 
-		dynamicData->subGood(m_pSelectedGood, 1);
-		dynamicData->setValueOfKey(GOLD_KEY, gold);
-		//解除引用
-		if (number == 0)
-			SDL_SAFE_RELEASE_NULL(m_pSelectedGood);
-		//更新显示
-		auto pBagGoodList = dynamicData->getBagGoodList();
-		this->showGoodLayer("bag_title_txt1.png", "sell_text.png", pBagGoodList, m_nCurPage);
-		
-		m_pFarmUILayer->updateShowingGold(gold.asInt());
-		m_pGoodLayer->updateShowingGold(gold.asInt());
+		m_pSliderDialog->setPrice(gold);
+		m_pSliderDialog->setMaxPercent(number);
+		//设置当前进度值为1
+		m_pSliderDialog->setPercent(1);
+		m_pSliderDialog->updateShowingTitle(m_pSelectedGood->getName());
 	}
 	else if (m_goodLayerType == GoodLayerType::Shop)
 	{
@@ -285,28 +284,34 @@ void FarmScene::useBtnCallback(GoodLayer* goodLayer)
 		int id = atoi(goodName.c_str());
 		auto pCropSt = StaticData::getInstance()->getCropStructByID(id);
 		auto lv = this->getValueOfKey(FARM_LEVEL_KEY).asInt();
-		
 		if (lv < pCropSt->level)
 		{
-			printf("you don't have enough level\n");
+			//auto text = STATIC_DATA_STRING("not_enough_lv_text");
+			//Toast::makeText(this, text, Color3B(255, 255, 255), 1.f);
+			printf("level low\n");
 			return ;
 		}
+		//呼出滑动条对话框
 		Value gold = this->getValueOfKey(GOLD_KEY);
 		int cost = m_pSelectedGood->getCost();
+		int maxPercent = gold.asInt() / cost;
 		//一个都买不起，提示
-		if (cost > gold.asInt())
+		if (maxPercent == 0)
 		{
-			printf("You don't have enough money\n");
+			//auto text = STATIC_DATA_STRING("not_enough_money_text");
+			//Toast::makeText(this, text, Color3B(255, 255, 255), 1.f);
+			printf("not enough money\n");
 			return ;
 		}
-		printf("buy the good success\n");
-		gold = gold.asInt() - cost;
-		//购买成功
-		dynamicData->setValueOfKey(GOLD_KEY, gold);
-		dynamicData->addGood(m_pSelectedGood->getGoodType(), goodName, 1);
-		//更新显示
-		m_pFarmUILayer->updateShowingGold(gold.asInt());
-		m_pGoodLayer->updateShowingGold(gold.asInt());
+
+		m_pSliderDialog->setVisible(true);
+		m_pSliderDialog->setShowing(true);
+
+		m_pSliderDialog->setPrice(cost);
+		m_pSliderDialog->setMaxPercent(maxPercent);
+		//设置当前进度为1
+		m_pSliderDialog->setPercent(1);
+		m_pSliderDialog->updateShowingTitle(m_pSelectedGood->getName());
 	}
 	else if (m_goodLayerType == GoodLayerType::SeedBag)
 	{
@@ -360,6 +365,51 @@ void FarmScene::selectGoodCallback(GoodLayer* goodLayer, GoodInterface* good)
 	SDL_SAFE_RELEASE_NULL(m_pSelectedGood);
 	m_pSelectedGood = selectedGood;
 	printf("%p\n", m_pSelectedGood);
+}
+
+void FarmScene::sliderDialogCallback(bool ret, int percent)
+{
+	m_pSliderDialog->setVisible(false);
+	m_pSliderDialog->setShowing(false);
+	//点击了取消按钮
+	if (!ret)
+		return;
+
+	auto dynamicData = DynamicData::getInstance();
+	Value gold = this->getValueOfKey(GOLD_KEY);
+	//仓库 出售
+	if (m_goodLayerType == GoodLayerType::Warehouse)
+	{
+		int number = m_pSelectedGood->getNumber();
+		gold = gold.asInt() + m_pSelectedGood->getCost() * percent;
+		number -= percent;
+		//减少物品
+		dynamicData->subGood(m_pSelectedGood, percent);
+		//解除引用
+		if (number == 0)
+		{
+			SDL_SAFE_RELEASE_NULL(m_pSelectedGood);
+		}
+		//更新显示 可能会改变m_pSelectedGood
+		vector<Good*>* pBagGoodList = DynamicData::getInstance()->getBagGoodList();
+		this->showGoodLayer("bag_title_txt1.png", "sell_text.png", pBagGoodList, m_nCurPage);
+	}
+	//商店 购买
+	else if (m_goodLayerType == GoodLayerType::Shop)
+	{
+		string goodName = m_pSelectedGood->getGoodName();
+		auto type = m_pSelectedGood->getGoodType();
+
+		Value gold = this->getValueOfKey(GOLD_KEY);
+		gold = gold.asInt() - m_pSelectedGood->getCost() * percent;
+		//增加物品
+		dynamicData->addGood(type, goodName, percent);
+	}
+	//金币回写
+	dynamicData->setValueOfKey(GOLD_KEY, gold);
+	//更新金币显示
+	m_pFarmUILayer->updateShowingGold(gold.asInt());
+	m_pGoodLayer->updateShowingGold(gold.asInt());
 }
 
 bool FarmScene::preloadResources()
