@@ -185,7 +185,7 @@ bool GoodLayer::onTouchBegan(Touch* touch, SDL_Event* event)
 	
 	//点击了
 	if (rect.containsPoint(pos1))
-		return false;
+		return true;
 	else
 	{
 		m_pDelegate->touchOutsideCallback(this);

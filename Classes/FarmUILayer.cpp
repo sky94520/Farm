@@ -324,9 +324,9 @@ void FarmUILayer::setVisibleOfOperationBtns(bool visible)
 	//菜单按钮
 	vector<MenuItemSprite*> items;
 
-	items.push_back(m_pShovelItem);
 	if (m_pOperatingCrop->isRipe())
 		items.push_back(m_pHarvestItem);
+	items.push_back(m_pShovelItem);
 
 	m_pMenu->setEnabled(visible);
 

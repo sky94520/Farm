@@ -371,8 +371,8 @@ void FarmScene::sliderDialogCallback(bool ret, int percent)
 {
 	m_pSliderDialog->setVisible(false);
 	m_pSliderDialog->setShowing(false);
-	//点击了取消按钮
-	if (!ret)
+	//点击了取消按钮 操作物品为0
+	if (!ret || percent == 0)
 		return;
 
 	auto dynamicData = DynamicData::getInstance();
