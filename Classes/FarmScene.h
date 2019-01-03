@@ -12,9 +12,11 @@ USING_NS_SDL;
 
 class SoilLayer;
 class CropLayer;
+class EffectLayer;
 class Good;
 class Soil;
 class SliderDialog;
+class TextDialog;
 
 /*物品层显示类型*/
 enum class GoodLayerType
@@ -57,6 +59,8 @@ public:
 private:
 	//滑动条对话框回调函数
 	void sliderDialogCallback(bool ret, int percent);
+	//尝试购买土地 回调函数
+	void tryBuyingSoilCallback(bool ret);
 private:
 	bool preloadResources();
 	//初始化土壤和作物
@@ -79,6 +83,7 @@ private:
 private:
 	SoilLayer* m_pSoilLayer;
 	CropLayer* m_pCropLayer;
+	EffectLayer* m_pEffectLayer;
 	FarmUILayer* m_pFarmUILayer;
 
 	GoodLayer* m_pGoodLayer;
@@ -89,11 +94,16 @@ private:
 	
 	//滑动条对话框
 	SliderDialog* m_pSliderDialog;
+	//文本对话框
+	TextDialog* m_pTextDialog;
+
 	//当前选中的土壤
 	Soil* m_pSelectedSoil;
 	//当前选中的物品
 	Good* m_pSelectedGood;
 	//商店物品列表
 	vector<Good*> m_shopList;
+	//可扩展土地 精灵
+	Sprite* m_pBrandSprite;
 };
 #endif

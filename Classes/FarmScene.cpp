@@ -1,21 +1,27 @@
 #include "FarmScene.h"
 #include "SoilLayer.h"
 #include "CropLayer.h"
+#include "EffectLayer.h"
 #include "Soil.h"
 #include "Crop.h"
 #include "DynamicData.h"
 #include "StaticData.h"
 #include "Seed.h"
 #include "SliderDialog.h"
+#include "TextDialog.h"
+#include "Entity.h"
+#include "Toast.h"
 
 FarmScene::FarmScene()
 	:m_pSoilLayer(nullptr)
 	,m_pCropLayer(nullptr)
+	,m_pEffectLayer(nullptr)
 	,m_pFarmUILayer(nullptr)
 	,m_pGoodLayer(nullptr)
 	,m_nCurPage(0)
 	,m_goodLayerType(GoodLayerType::None)
 	,m_pSliderDialog(nullptr)
+	,m_pTextDialog(nullptr)
 	,m_pSelectedSoil(nullptr)
 	,m_pSelectedGood(nullptr)
 {
@@ -44,6 +50,12 @@ bool FarmScene::init()
 	//创建作物层
 	m_pCropLayer = CropLayer::create();
 	this->addChild(m_pCropLayer);
+	//特效层
+	m_pEffectLayer = EffectLayer::create();
+	this->addChild(m_pEffectLayer);
+	//可扩展土地
+	m_pBrandSprite = Sprite::createWithSpriteFrameName("farm_ui_tag_bg2.png");
+	this->addChild(m_pBrandSprite);
 	//ui层
 	m_pFarmUILayer = FarmUILayer::create();
 	m_pFarmUILayer->setDelegate(this);
@@ -61,11 +73,28 @@ bool FarmScene::init()
 	m_pSliderDialog->setVisible(false);
 	m_pSliderDialog->setCallback(SDL_CALLBACK_2(FarmScene::sliderDialogCallback, this));
 	this->addChild(m_pSliderDialog);
+	//文本对话框
+	m_pTextDialog = TextDialog::create();
+	m_pTextDialog->setPosition(visibleSize.width / 2, visibleSize.height / 2);
+	m_pTextDialog->setVisible(false);
+	m_pTextDialog->setCallback(SDL_CALLBACK_1(FarmScene::tryBuyingSoilCallback, this));
+	this->addChild(m_pTextDialog);
 
 	//初始化土壤和作物
 	this->initializeSoilsAndCrops();
 	//初始化商店
 	this->initializeShopGoods();
+	//确认可扩展土地精灵的位置
+	auto soilID = this->getValueOfKey(FARM_EXTENSIBLE_SOIL_KEY).asInt();
+	if (soilID == 0)
+	{
+		m_pBrandSprite->setVisible(false);
+	}
+	else
+	{
+		auto pos = m_pSoilLayer->getSoilPositionByID(soilID);
+		m_pBrandSprite->setPosition(pos);
+	}
 	//更新数据显示
 	int gold = this->getValueOfKey(GOLD_KEY).asInt();
 	int lv = this->getValueOfKey(FARM_LEVEL_KEY).asInt();
@@ -105,6 +134,25 @@ bool FarmScene::handleTouchEvent(Touch* touch, SDL_Event* event)
 	if (soil == nullptr)
 	{
 		m_pFarmUILayer->hideOperationBtns();
+		//是否点击了扩展面板 购买土地
+		auto rect = m_pBrandSprite->getBoundingBox();
+		if (m_pBrandSprite->isVisible() 
+		 && rect.containsPoint(location))
+		{
+			string content = STATIC_DATA_STRING("extensible_format");
+			auto soilID = this->getValueOfKey(FARM_EXTENSIBLE_SOIL_KEY).asInt();
+			//当前购买的是第几块土地
+			int id = 12 - soilID;
+			//获取结构体
+			auto pExtensibleSoilSt = StaticData::getInstance()->getExtensibleSoilStructByID(id);
+			content = StringUtils::format(content.c_str()
+				, pExtensibleSoilSt->lv, pExtensibleSoilSt->value);
+
+			m_pTextDialog->setVisible(true);
+			m_pTextDialog->setShowing(true);
+			m_pTextDialog->updateShowingTitle(STATIC_DATA_STRING("extensible_text"));
+			m_pTextDialog->updateShowingContent(content);
+		}
 		return true;
 	}
 	//获取土壤对应的作物
@@ -210,7 +258,8 @@ void FarmScene::showSeedBag()
 void FarmScene::saveData()
 {
 	DynamicData::getInstance()->save();
-	printf("save data success\n");
+	auto text = STATIC_DATA_STRING("save_success_text");
+	Toast::makeText(this, text, Color3B(255, 255, 255), 1.f);
 }
 
 void FarmScene::pageBtnCallback(GoodLayer* goodLayer, int value)
@@ -286,9 +335,8 @@ void FarmScene::useBtnCallback(GoodLayer* goodLayer)
 		auto lv = this->getValueOfKey(FARM_LEVEL_KEY).asInt();
 		if (lv < pCropSt->level)
 		{
-			//auto text = STATIC_DATA_STRING("not_enough_lv_text");
-			//Toast::makeText(this, text, Color3B(255, 255, 255), 1.f);
-			printf("level low\n");
+			auto text = STATIC_DATA_STRING("not_enough_lv_text");
+			Toast::makeText(this, text, Color3B(255, 255, 255), 1.f);
 			return ;
 		}
 		//呼出滑动条对话框
@@ -298,9 +346,8 @@ void FarmScene::useBtnCallback(GoodLayer* goodLayer)
 		//一个都买不起，提示
 		if (maxPercent == 0)
 		{
-			//auto text = STATIC_DATA_STRING("not_enough_money_text");
-			//Toast::makeText(this, text, Color3B(255, 255, 255), 1.f);
-			printf("not enough money\n");
+			auto text = STATIC_DATA_STRING("not_enough_money_text");
+			Toast::makeText(this, text, Color3B(255, 255, 255), 1.f);
 			return ;
 		}
 
@@ -318,7 +365,8 @@ void FarmScene::useBtnCallback(GoodLayer* goodLayer)
 		//先判断类型是否合法
 		if (m_pSelectedGood->getGoodType() != GoodType::Seed)
 		{
-			printf("the selected good is not a seed\n");
+			auto text = STATIC_DATA_STRING("none_seed_text");
+			Toast::makeText(this, text, Color3B(255, 255, 255), 1.f);
 			return ;
 		}
 		//新建作物对象
@@ -364,7 +412,6 @@ void FarmScene::selectGoodCallback(GoodLayer* goodLayer, GoodInterface* good)
 	//设置当前选中物品
 	SDL_SAFE_RELEASE_NULL(m_pSelectedGood);
 	m_pSelectedGood = selectedGood;
-	printf("%p\n", m_pSelectedGood);
 }
 
 void FarmScene::sliderDialogCallback(bool ret, int percent)
@@ -412,6 +459,60 @@ void FarmScene::sliderDialogCallback(bool ret, int percent)
 	m_pGoodLayer->updateShowingGold(gold.asInt());
 }
 
+void FarmScene::tryBuyingSoilCallback(bool ret)
+{
+	m_pTextDialog->setVisible(false);
+	m_pTextDialog->setShowing(false);
+
+	if (!ret)
+		return ;
+	auto dynamicData = DynamicData::getInstance();
+
+	int soilID = this->getValueOfKey(FARM_EXTENSIBLE_SOIL_KEY).asInt();
+	Value gold = this->getValueOfKey(GOLD_KEY);
+	int lv = this->getValueOfKey(FARM_LEVEL_KEY).asInt();
+	//当前购买的是第几块土地
+	int id = 12 - soilID;
+	//获取结构体
+	auto pExtensibleSoilSt = StaticData::getInstance()->getExtensibleSoilStructByID(id);
+	//是否满足限制条件
+	if (lv < pExtensibleSoilSt->lv || gold.asInt() < pExtensibleSoilSt->value)
+	{
+		string text;
+		if (lv < pExtensibleSoilSt->lv)
+			text = STATIC_DATA_STRING("not_enough_lv_text");
+		if (gold.asInt() < pExtensibleSoilSt->value)
+			text = STATIC_DATA_STRING("not_enough_money_text");
+
+		Toast::makeText(this, text, Color3B(255, 255, 255), 1.f);
+		return ;
+	}
+	//减少金币
+	gold = gold.asInt() - pExtensibleSoilSt->value;
+	dynamicData->setValueOfKey(GOLD_KEY, gold);
+	//更新显示
+	m_pFarmUILayer->updateShowingGold(gold.asInt());
+	m_pGoodLayer->updateShowingGold(gold.asInt());
+
+	//创建一个Soil
+	auto soil = m_pSoilLayer->addSoil(soilID, 1);
+	//更新存档
+	dynamicData->updateSoil(soil);
+	//土地全部购买 隐藏扩展土地精灵
+	if (soilID == 0)
+	{
+		m_pBrandSprite->setVisible(false);
+	}
+	else
+	{
+		soilID--;
+		Value value = Value(soilID);
+		dynamicData->setValueOfKey(FARM_EXTENSIBLE_SOIL_KEY, value);
+		auto pos = m_pSoilLayer->getSoilPositionByID(soilID);
+		m_pBrandSprite->setPosition(pos);
+	}
+}
+
 bool FarmScene::preloadResources()
 {
 	//加载资源
@@ -421,6 +522,7 @@ bool FarmScene::preloadResources()
         spriteCache->addSpriteFramesWithFile("sprite/farm_ui_res.xml");
         spriteCache->addSpriteFramesWithFile("sprite/good_layer_ui_res.xml");
         spriteCache->addSpriteFramesWithFile("sprite/slider_dialog_ui_res.xml");
+        spriteCache->addSpriteFramesWithFile("sprite/butterfly.xml");
 
         return true;
 
@@ -562,12 +664,17 @@ Value FarmScene::getValueOfKey(const string& key)
 	//不存在对应的键，自行设置
 	if (p == nullptr)
 	{
+		//农场默认等级
 		if (key == FARM_LEVEL_KEY)
 			value = Value(1);
+		//农场默认经验
 		else if (key == FARM_EXP_KEY)
 			value = Value(0);
+		//默认金币
 		else if (key == GOLD_KEY)
 			value = Value(0);
+		else if (key == FARM_EXTENSIBLE_SOIL_KEY)
+			value = Value(11);
 		//设置值
 		dynamicData->setValueOfKey(key, value);
 	}
