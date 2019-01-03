@@ -12,6 +12,8 @@ class Entity:public Node
 public:
 	Entity();
 	~Entity();
+	CREATE_FUNC(Entity);
+	bool init();
 	Sprite* getSprite() const;
 	//和bind不同，此函数不改变content size
 	void setSprite(Sprite* sprite);

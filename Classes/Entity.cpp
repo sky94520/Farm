@@ -12,6 +12,11 @@ Entity::~Entity()
 {
 }
 
+bool Entity::init()
+{
+	return true;
+}
+
 void Entity::setSprite(Sprite* sprite)
 {
 	if(m_pSprite)

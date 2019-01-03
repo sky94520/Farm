@@ -17,10 +17,11 @@ class Soil;
 class Good;
 enum class GoodType;
 
-//农场等级和农场经验
+//农场
 #define FARM_LEVEL_KEY "farm_level"
 #define FARM_EXP_KEY "farm_exp"
 #define GOLD_KEY "gold"
+#define FARM_EXTENSIBLE_SOIL_KEY "extensible_soil"
 //--------------------------------------------DynamicData---------------------------------------
 class DynamicData : public Object
 {
