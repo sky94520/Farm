@@ -1,5 +1,7 @@
 #include "SDL_Engine/SDL_Engine.h"
 #include "FarmScene.h"
+#include "StaticData.h"
+#include "DynamicData.h"
 
 using namespace std;
 using namespace SDL;
@@ -40,6 +42,10 @@ int main(int argv,char**argc)
 		}
 		//系统清除
 		Director::purge();
+		//释放单例类
+		StaticData::purge();
+		DynamicData::purge();
+
 		//释放内存池
 		PoolManager::getInstance()->purge();
 	}
