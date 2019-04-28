@@ -1,4 +1,5 @@
 #include "StaticData.h"
+#include "CSVLoader.h"
 
 StaticData* StaticData::s_pInstance = nullptr;
 
@@ -26,52 +27,52 @@ bool StaticData::loadCropConfigFile()
 	int id = 0;
 	CropStruct cropSt;
 
-	auto callback = [&id, &cropSt, this](int col, const Value& value)
+	//csv 解析器
+	CSVLoader* loader = new CSVLoader();
+	loader->loadStr(FileUtils::getInstance()->getDataFromFile("data/crops.csv"));
+	//跳过前两行
+	loader->skip(2);
+	while (loader->hasNextLine())
 	{
-		switch (col)
+		id = loader->nextInt();
+		cropSt.name = loader->nextStr();
+		cropSt.desc = loader->nextStr();
+		//生长周期
+		string text = loader->nextStr();
+		string sub;
+		size_t begin = 1, end = 1;
+
+		while (end != string::npos)
 		{
-			case 0: id = value.asInt(); break;
-			case 1: cropSt.name = value.asString(); break;
-			case 2: cropSt.desc = value.asString(); break;
-			case 3: 
-			{
-				string text = value.asString();
-				string sub;
-				size_t begin = 1, end = 1;
+			end = text.find(' ', begin);
 
-				while (end != string::npos)
-				{
-					end = text.find(' ', begin);
-
-					if (end == string::npos)
-						sub = text.substr(begin, text.size() - begin - 1);
-					else
-					{
-						sub = text.substr(begin, end - begin);
-						begin = end + 1;
-					}
-					cropSt.growns.push_back(SDL_atoi(sub.c_str()));
-				}
-			} 
-			break;
-			case 4: cropSt.harvestCount = value.asInt(); break;
-			case 5: cropSt.seedValue = value.asInt(); break;
-			case 6: cropSt.fruitValue = value.asInt(); break;
-			case 7: cropSt.number = value.asInt(); break;
-			case 8: cropSt.numberVar = value.asInt(); break;
-			case 9: cropSt.absorb = value.asString(); break;
-			case 10: cropSt.level = value.asInt(); break;
-			case 11: 
+			if (end == string::npos)
+				sub = text.substr(begin, text.size() - begin - 1);
+			else
 			{
-				cropSt.exp = value.asInt(); 
-				//存入数据
-				m_cropMap.insert(make_pair(id, cropSt));
-				cropSt.growns.clear();
-				break;
+				sub = text.substr(begin, end - begin);
+				begin = end + 1;
 			}
+			cropSt.growns.push_back(SDL_atoi(sub.c_str()));
 		}
-	};
-	return this->loadCsvFile("data/crops.csv", callback, 2);
+
+		cropSt.harvestCount = loader->nextInt();
+		cropSt.seedValue = loader->nextInt();
+		cropSt.fruitValue = loader->nextInt();
+		cropSt.number = loader->nextInt();
+		cropSt.numberVar = loader->nextInt();
+		cropSt.absorb = loader->nextStr();
+		cropSt.level = loader->nextInt();
+		cropSt.exp = loader->nextInt();
+
+		//存入数据
+		m_cropMap.insert(make_pair(id, cropSt));
+		cropSt.growns.clear();
+	}
+
+	delete loader;
+
+	return true;
 }
 
 bool StaticData::loadSoilConfigFile()
@@ -79,44 +80,23 @@ bool StaticData::loadSoilConfigFile()
 	int id = 0;
 	ExtensibleSoilStruct soilSt;
 
-	auto callback = [&id, &soilSt, this](int col, const Value& value)
+	//csv 解析器
+	CSVLoader* loader = new CSVLoader();
+	loader->loadStr(FileUtils::getInstance()->getDataFromFile("data/soils.csv"));
+	//跳过前两行
+	loader->skip(2);
+	while (loader->hasNextLine())
 	{
-		switch (col)
-		{
-			case 0: id = value.asInt(); break;
-			case 1: soilSt.value = value.asInt(); break;
-			case 2: 
-				soilSt.lv = value.asInt(); 
+		id = loader->nextInt();
+		soilSt.value = loader->nextInt();
+		soilSt.lv = loader->nextInt();
 
-				m_extensibleSoilMap.insert(make_pair(id, soilSt));
-				break;
-		}
-	};
-
-	return this->loadCsvFile("data/soils.csv", callback, 2);
-}
-	
-bool StaticData::loadCsvFile(const string& filename
-		, const function<void (int, const Value&)>& callback, int skips)
-{
-	//加载数据
-	istringstream in(FileUtils::getInstance()->getDataFromFile(filename));
-	string line;
-	
-	while (getline(in, line))
-	{
-		if (skips != 0)
-		{
-			skips--;
-			continue;
-		}
-		//解析数据
-		StringUtils::split(line, ",", callback);
+		m_extensibleSoilMap.insert(make_pair(id, soilSt));
 	}
-
+	delete loader;
 	return true;
 }
-
+	
 Value* StaticData::getValueForKey(const string& key)
 {
 	auto iter = m_valueMap.find(key);

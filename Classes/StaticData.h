@@ -75,9 +75,6 @@ private:
 	bool init();
 	bool loadCropConfigFile();
 	bool loadSoilConfigFile();
-	//加载csv文件
-	bool loadCsvFile(const string& filename
-		, const function<void (int, const Value&)>&, int skips = 0);
 public:
 	/** 
 	 * 根据键获取值
