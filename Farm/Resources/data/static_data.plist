@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <!--00000000000000000000农场相关00000000000000000000000000-->
+    <key>soil_number</key>
+    <integer>18</integer>
+    <!--作物开始的贴图-->
+    <key>crop_start_filename</key>
+    <string>crop_start.png</string>
+    <!--作物结束的贴图-->
+    <key>crop_end_filename</key>
+    <string>crop_end.png</string>
+    <!--作物图片格式-->
+    <key>crop_filename_format</key>
+    <string>crop_%03d_%02d.png</string>
+    <!--作物果实图片格式-->
+    <key>fruit_filename_format</key>
+    <string>crop_%03d.png</string>
+
+    <key>crop_name_format</key>
+    <string>%s[第%d/%d季]</string>
+    <key>crop_name_witherred_format</key>
+    <string>%s[已枯萎]</string>
+    <key>crop_time_format</key>
+    <string>%d小时%d分钟%d秒后成熟</string>
+    <!--文本-->
+    <key>harvest_text</key>
+    <string>收获</string>
+    <key>shovel_text</key>
+    <string>铲除</string>
+    <key>fight_text</key>
+    <string>战斗</string>
+    <key>ripe_text</key>
+    <string>成熟</string>
+    <key>seed_text</string>
+    <string>种子</string>
+    <key>fruit_text</key>
+    <string>果实</string>
+    <key>seed_desc_format</key>
+    <string>需求等级：%d   经验：%d  季数：%d   预计产量：%d</string>
+    
+    <key>extensible_text</key>
+    <string>扩建土地</string>
+    <key>extensible_format</key>
+    <string>扩建这块土地需要等级%d级和金币%d</string>
+    <key>not_enough_lv_text</key>
+    <string>你等级不够哦</string>
+    <key>not_enough_money_text</key>
+    <string>你没有足够的金钱哦</string>
+    <key>none_seed_text</key>
+    <string>选中的物品不是种子，无法种植哦</string>
+    <key>save_success_text</key>
+    <string>存档保存成功</string>
+
+    <key>bag_good_list</key>
+    <array></array>
+  </dict>
+</plist>

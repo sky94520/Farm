@@ -39,8 +39,11 @@ bool HelloWorld::init()
 
     _eventDispatcher->addEventListener(listener, this);
     
-    auto label = LabelBMFont::create("Love", "fonts/1.fnt");
-    label->setColor(Color3B(0, 0, 0));
+	//¼ÓÔØlayer
+	auto tiledMap = TMXTiledMap::create("farm_map/farm.tmx");
+	this->addChild(tiledMap);
+
+	auto label = LabelDotChar::create("Hello World", 3, Color3B(0, 0, 0));
     label->setTag(10);
     label->setPosition(200, 200);
     this->addChild(label);

@@ -1,4 +1,7 @@
 #include "SDL_Engine/SDL_Engine.h"
+#include "FarmScene.h"
+#include "StaticData.h"
+#include "DynamicData.h"
 #include "HelloWorldScene.h"
 
 using namespace std;
@@ -7,7 +10,7 @@ using namespace SDL;
 int main(int argv,char**argc)
 {
 	//窗口创建成功
-	if(Director::getInstance()->init("RPG",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,960,640,SDL_WINDOW_SHOWN))
+	if(Director::getInstance()->init("Farm02",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,960,640,SDL_WINDOW_SHOWN))
 	{
 		std::string platform = Director::getInstance()->getPlatform();
 
@@ -22,13 +25,14 @@ int main(int argv,char**argc)
 		}
 		else//设置鼠标和触碰事件分离
 		{
-			SDL_SetHint(SDL_HINT_ANDROID_SEPARATE_MOUSE_AND_TOUCH,"1");
+			//SDL_SetHint(SDL_HINT_ANDROID_SEPARATE_MOUSE_AND_TOUCH,"1");
 		}
 		//开启垂直同步
 		SDL_SetHint(SDL_HINT_RENDER_VSYNC, "1");
 
 		//第一个启动场景
-		Director::getInstance()->runWithScene(HelloWorld::createScene());
+		Director::getInstance()->runWithScene(FarmScene::create());
+		//Director::getInstance()->runWithScene(HelloWorld::createScene());
 		Director::getInstance()->setDisplayStates(true);
 		Director::getInstance()->setSecondsPerFrame(1/60.f);
 		Director::getInstance()->setResolutionScale();
@@ -40,6 +44,10 @@ int main(int argv,char**argc)
 		}
 		//系统清除
 		Director::purge();
+		//释放单例类
+		StaticData::purge();
+		DynamicData::purge();
+
 		//释放内存池
 		PoolManager::getInstance()->purge();
 	}

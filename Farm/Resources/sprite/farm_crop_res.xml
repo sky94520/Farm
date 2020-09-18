@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:0d8e85bc2eb0d7b4941cbacbecb871b8$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+-->
+<TextureAtlas imagePath="farm_crop_res.png" width="1024" height="1024">
+    <sprite n="crop_101.png" x="178" y="714" w="46" h="30" oX="9" oY="1" oW="48" oH="48" r="y"/>
+    <sprite n="crop_101_01.png" x="879" y="296" w="53" h="41" oX="80" oY="25" oW="201" oH="103" r="y"/>
+    <sprite n="crop_101_02.png" x="637" y="556" w="51" h="49" oX="76" oY="26" oW="201" oH="103" r="y"/>
+    <sprite n="crop_101_03.png" x="2" y="675" w="81" h="65" oX="68" oY="11" oW="201" oH="103" r="y"/>
+    <sprite n="crop_101_04.png" x="536" y="406" w="103" h="93" oX="51" oY="0" oW="201" oH="103"/>
+    <sprite n="crop_102.png" x="281" y="705" w="48" h="32" oX="4" oY="0" oW="48" oH="48" r="y"/>
+    <sprite n="crop_102_01.png" x="879" y="253" w="53" h="41" oX="79" oY="25" oW="201" oH="103" r="y"/>
+    <sprite n="crop_102_02.png" x="696" y="511" w="51" h="49" oX="76" oY="26" oW="201" oH="103" r="y"/>
+    <sprite n="crop_102_03.png" x="95" y="649" w="81" h="65" oX="68" oY="11" oW="201" oH="103" r="y"/>
+    <sprite n="crop_102_04.png" x="934" y="269" w="87" h="103" oX="71" oY="0" oW="201" oH="103"/>
+    <sprite n="crop_103.png" x="983" y="522" w="34" h="48" oX="6" oY="0" oW="48" oH="48"/>
+    <sprite n="crop_103_01.png" x="287" y="604" w="77" h="65" oX="61" oY="19" oW="201" oH="103"/>
+    <sprite n="crop_103_02.png" x="366" y="604" w="61" h="43" oX="78" oY="20" oW="201" oH="103" r="y"/>
+    <sprite n="crop_103_03.png" x="534" y="501" w="101" h="91" oX="54" oY="1" oW="201" oH="103" r="y"/>
+    <sprite n="crop_103_04.png" x="429" y="511" w="99" h="99" oX="51" oY="2" oW="201" oH="103"/>
+    <sprite n="crop_103_05.png" x="818" y="2" w="117" h="103" oX="41" oY="0" oW="201" oH="103"/>
+    <sprite n="crop_104.png" x="258" y="153" w="40" h="34" oX="7" oY="4" oW="48" oH="48" r="y"/>
+    <sprite n="crop_104_01.png" x="637" y="511" w="57" h="43" oX="78" oY="23" oW="201" oH="103" r="y"/>
+    <sprite n="crop_104_02.png" x="224" y="452" w="73" h="77" oX="64" oY="13" oW="201" oH="103"/>
+    <sprite n="crop_104_03.png" x="299" y="313" w="111" h="91" oX="44" oY="6" oW="201" oH="103"/>
+    <sprite n="crop_104_04.png" x="123" y="267" w="111" h="91" oX="44" oY="6" oW="201" oH="103"/>
+    <sprite n="crop_104_05.png" x="930" y="374" w="91" h="103" oX="54" oY="0" oW="201" oH="103"/>
+    <sprite n="crop_105.png" x="284" y="671" w="48" h="32" oX="7" oY="0" oW="48" oH="48" r="y"/>
+    <sprite n="crop_105_01.png" x="429" y="612" w="49" h="43" oX="76" oY="30" oW="201" oH="103"/>
+    <sprite n="crop_105_02.png" x="196" y="596" w="89" h="65" oX="56" oY="18" oW="201" oH="103"/>
+    <sprite n="crop_105_03.png" x="431" y="410" w="101" h="99" oX="51" oY="1" oW="201" oH="103" r="y"/>
+    <sprite n="crop_105_04.png" x="299" y="406" w="101" h="99" oX="49" oY="2" oW="201" oH="103"/>
+    <sprite n="crop_105_05.png" x="99" y="556" w="95" h="91" oX="54" oY="3" oW="201" oH="103" r="y"/>
+    <sprite n="crop_106.png" x="258" y="107" w="40" h="44" oX="3" oY="1" oW="48" oH="48"/>
+    <sprite n="crop_106_01.png" x="859" y="430" w="69" h="47" oX="65" oY="28" oW="201" oH="103"/>
+    <sprite n="crop_106_02.png" x="877" y="339" w="51" h="89" oX="75" oY="6" oW="201" oH="103"/>
+    <sprite n="crop_106_03.png" x="299" y="507" w="101" h="95" oX="50" oY="4" oW="201" oH="103"/>
+    <sprite n="crop_106_04.png" x="433" y="206" w="111" h="103" oX="45" oY="0" oW="201" oH="103"/>
+    <sprite n="crop_106_05.png" x="546" y="305" w="103" h="99" oX="48" oY="1" oW="201" oH="103"/>
+    <sprite n="crop_107.png" x="334" y="671" w="30" h="48" oX="8" oY="0" oW="48" oH="48"/>
+    <sprite n="crop_107_01.png" x="258" y="189" w="39" h="59" oX="80" oY="21" oW="201" oH="103"/>
+    <sprite n="crop_107_02.png" x="178" y="663" w="65" h="49" oX="76" oY="19" oW="201" oH="103" r="y"/>
+    <sprite n="crop_107_03.png" x="651" y="313" w="103" h="95" oX="49" oY="3" oW="201" oH="103"/>
+    <sprite n="crop_107_04.png" x="111" y="457" w="97" h="97" oX="52" oY="2" oW="201" oH="103"/>
+    <sprite n="crop_107_05.png" x="780" y="107" w="105" h="103" oX="48" oY="0" oW="201" oH="103"/>
+    <sprite n="crop_108.png" x="366" y="649" w="48" h="32" oX="7" oY="0" oW="48" oH="48" r="y"/>
+    <sprite n="crop_108_01.png" x="924" y="514" w="57" h="51" oX="72" oY="25" oW="201" oH="103"/>
+    <sprite n="crop_108_02.png" x="937" y="2" w="83" h="109" oX="45" oY="9" oW="201" oH="103" r="y"/>
+    <sprite n="crop_108_03.png" x="552" y="200" w="111" h="103" oX="45" oY="0" oW="201" oH="103"/>
+    <sprite n="crop_108_04.png" x="699" y="2" w="117" h="103" oX="42" oY="0" oW="201" oH="103"/>
+    <sprite n="crop_108_05.png" x="667" y="107" w="111" h="103" oX="45" oY="0" oW="201" oH="103"/>
+    <sprite n="crop_109.png" x="887" y="157" w="48" h="46" oX="0" oY="1" oW="48" oH="48"/>
+    <sprite n="crop_109_01.png" x="987" y="479" w="35" h="41" oX="83" oY="30" oW="201" oH="103"/>
+    <sprite n="crop_109_02.png" x="937" y="192" w="81" h="75" oX="60" oY="14" oW="201" oH="103"/>
+    <sprite n="crop_109_03.png" x="113" y="360" w="109" h="95" oX="46" oY="3" oW="201" oH="103"/>
+    <sprite n="crop_109_04.png" x="299" y="210" w="111" h="101" oX="45" oY="0" oW="201" oH="103"/>
+    <sprite n="crop_109_05.png" x="2" y="513" w="95" h="91" oX="55" oY="3" oW="201" oH="103" r="y"/>
+    <sprite n="crop_110.png" x="245" y="700" w="34" h="44" oX="5" oY="1" oW="48" oH="48"/>
+    <sprite n="crop_110_01.png" x="245" y="663" w="37" h="35" oX="82" oY="33" oW="201" oH="103" r="y"/>
+    <sprite n="crop_110_02.png" x="859" y="479" w="63" h="59" oX="69" oY="21" oW="201" oH="103"/>
+    <sprite n="crop_110_03.png" x="772" y="212" w="105" h="89" oX="47" oY="6" oW="201" oH="103"/>
+    <sprite n="crop_110_04.png" x="2" y="311" w="109" h="97" oX="45" oY="2" oW="201" oH="103"/>
+    <sprite n="crop_110_05.png" x="2" y="410" w="107" h="101" oX="46" oY="1" oW="201" oH="103"/>
+    <sprite n="crop_111.png" x="887" y="107" w="48" h="48"/>
+    <sprite n="crop_111_01.png" x="236" y="300" w="61" h="65" oX="68" oY="21" oW="201" oH="103" r="y"/>
+    <sprite n="crop_111_02.png" x="937" y="113" w="83" h="77" oX="62" oY="10" oW="201" oH="103" r="y"/>
+    <sprite n="crop_111_03.png" x="155" y="2" w="143" h="103" oX="29" oY="0" oW="201" oH="103"/>
+    <sprite n="crop_111_04.png" x="2" y="2" w="151" h="103" oX="24" oY="0" oW="201" oH="103"/>
+    <sprite n="crop_111_05.png" x="300" y="2" w="139" h="101" oX="30" oY="1" oW="201" oH="103"/>
+    <sprite n="crop_112.png" x="480" y="612" w="48" h="42" oX="0" oY="3" oW="48" oH="48"/>
+    <sprite n="crop_112_01.png" x="412" y="296" w="17" h="31" oX="92" oY="35" oW="201" oH="103"/>
+    <sprite n="crop_112_02.png" x="530" y="594" w="51" h="47" oX="77" oY="26" oW="201" oH="103" r="y"/>
+    <sprite n="crop_112_03.png" x="210" y="531" w="87" h="63" oX="57" oY="19" oW="201" oH="103"/>
+    <sprite n="crop_112_04.png" x="552" y="107" w="113" h="91" oX="43" oY="5" oW="201" oH="103"/>
+    <sprite n="crop_112_05.png" x="665" y="212" w="105" h="99" oX="48" oY="2" oW="201" oH="103" pX="0.5" pY="0.8"/>
+    <sprite n="crop_112_06.png" x="580" y="2" w="117" h="103" oX="42" oY="0" oW="201" oH="103" pX="0.5" pY="0.8"/>
+    <sprite n="crop_113.png" x="258" y="250" w="38" h="48" oX="0" oY="5" oW="48" oH="48" r="y"/>
+    <sprite n="crop_113_01.png" x="924" y="479" w="61" h="33" oX="83" oY="21" oW="201" oH="103" r="y"/>
+    <sprite n="crop_113_02.png" x="641" y="410" w="101" h="99" oX="50" oY="1" oW="201" oH="103"/>
+    <sprite n="crop_113_03.png" x="772" y="303" w="103" h="103" oX="48" oY="0" oW="201" oH="103"/>
+    <sprite n="crop_113_04.png" x="756" y="408" w="101" h="101" oX="50" oY="1" oW="201" oH="103"/>
+    <sprite n="crop_113_05.png" x="431" y="311" w="103" h="97" oX="52" oY="0" oW="201" oH="103" r="y"/>
+    <sprite n="crop_114.png" x="402" y="437" w="26" h="46" oX="11" oY="0" oW="48" oH="48"/>
+    <sprite n="crop_114_01.png" x="402" y="406" w="27" h="29" oX="86" oY="38" oW="201" oH="103" r="y"/>
+    <sprite n="crop_114_02.png" x="583" y="594" w="49" h="47" oX="76" oY="26" oW="201" oH="103" r="y"/>
+    <sprite n="crop_114_03.png" x="2" y="606" w="91" h="67" oX="54" oY="17" oW="201" oH="103"/>
+    <sprite n="crop_114_04.png" x="441" y="2" w="137" h="103" oX="31" oY="0" oW="201" oH="103"/>
+    <sprite n="crop_114_05.png" x="300" y="105" w="131" h="103" oX="34" oY="0" oW="201" oH="103"/>
+    <sprite n="crop_114_06.png" x="2" y="107" w="127" h="103" oX="36" oY="0" oW="201" oH="103"/>
+    <sprite n="crop_115.png" x="887" y="205" w="48" h="46" oX="1" oY="0" oW="48" oH="48" r="y"/>
+    <sprite n="crop_115_01.png" x="412" y="210" w="19" h="41" oX="91" oY="30" oW="201" oH="103"/>
+    <sprite n="crop_115_02.png" x="402" y="485" w="25" h="65" oX="87" oY="18" oW="201" oH="103"/>
+    <sprite n="crop_115_03.png" x="224" y="367" w="73" h="83" oX="58" oY="15" oW="201" oH="103" r="y"/>
+    <sprite n="crop_115_04.png" x="433" y="107" w="117" h="97" oX="42" oY="2" oW="201" oH="103"/>
+    <sprite n="crop_115_05.png" x="131" y="107" w="125" h="99" oX="37" oY="2" oW="201" oH="103"/>
+    <sprite n="crop_115_06.png" x="2" y="212" w="119" h="97" oX="40" oY="2" oW="201" oH="103"/>
+    <sprite n="crop_end.png" x="131" y="208" w="125" h="57" oX="37" oY="22" oW="201" oH="103"/>
+    <sprite n="crop_start.png" x="412" y="253" w="19" h="41" oX="80" oY="41" oW="201" oH="103" r="y"/>
+</TextureAtlas>

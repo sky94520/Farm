@@ -1,0 +1,3 @@
+﻿  FarmScene.cpp
+d:\coding\cplusplus\farm\classes\farmscene.cpp(378): warning C4244: “参数”: 从“time_t”转换到“int”，可能丢失数据
+  Farm.vcxproj -> D:\coding\CPlusPlus\Farm\Debug\Farm.exe

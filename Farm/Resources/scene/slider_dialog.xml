@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Layer anchor-point="0.5,0.5" name="bag_good_layer" size="362,187">
+	<!--bg-->
+	<Sprite anchor-point="0.5,0.5" name="bg" position="181,93">
+		<properties>
+			<property name="filename" value="dialog_bg.png"/>
+			<property name="res-type" value="XML"/>
+		</properties>
+	</Sprite>
+	<!--标题文本-->
+	<LabelBMFont position="181,20"  anchor-point="0.5,0.5" name="title_text">
+		<properties>
+			<property name="text" value="1234"/>
+			<property name="font-path" value="fonts/1.fnt"/>
+			<property name="font-color" value="255,255,255"/>
+			<property name="width" value="300"/>
+		</properties>
+	</LabelBMFont>
+
+	<Slider position="181,63" size="280,21" name="number_slider">
+		<properties>
+			<property name="bar" value="bt6_1.png"/>
+			<property name="progress-bar" value="bt6_2.png"/>
+			<property name="ball-normal" value="farm_ui_star.png"/>
+			<property name="res-type" value="XML"/>
+			<property name="percent" value="0"/>
+			<property name="max-percent" value="100"/>
+			<property name="priority" value="-4"/>
+		</properties>
+	</Slider>
+	<!--当前选中的个数-->
+	<Sprite position="100,100">
+		<properties>
+			<property name="filename" value="number_text.png"/>
+			<property name="res-type" value="XML"/>
+			<property name="color-mod" value="0,0,0"/>
+		</properties>
+	</Sprite>
+	<LabelAtlas position="100,130" anchor-point="0.5,0.5" name="num_label">
+		<properties>
+			<property name="text" value="0"/>
+			<property name="filename" value="common-font.png"/>
+			<property name="item-width" value="16"/>
+			<property name="item-height" value="24"/>
+			<property name="start-char" value="48"/>
+		</properties>
+	</LabelAtlas>
+	<!--需要的价钱-->
+	<Sprite position="240,100">
+		<properties>
+			<property name="filename" value="worth_text.png"/>
+			<property name="res-type" value="XML"/>
+			<property name="color-mod" value="0,0,0"/>
+		</properties>
+	</Sprite>
+	<LabelAtlas position="240,130" anchor-point="0.5,0.5" name="worth_label">
+		<properties>
+			<property name="text" value="0"/>
+			<property name="filename" value="common-font.png"/>
+			<property name="item-width" value="16"/>
+			<property name="item-height" value="24"/>
+			<property name="start-char" value="48"/>
+		</properties>
+	</LabelAtlas>
+	<!--确认-->
+	<Button position="100,160" name="ok_btn">
+		<properties>
+			<property name="normal-image" value="sbt4_1.png"/>
+			<property name="selected-image" value="sbt4_2.png"/>
+			<property name="disabled-image" value="sbt4_3.png"/>
+			<property name="res-type" value="XML"/>
+			<property name="priority" value="-4"/>
+		</properties>
+		<Sprite position="33,16">
+			<properties>
+				<property name="filename" value="ok_text.png"/>
+				<property name="res-type" value="XML"/>
+			</properties>
+		</Sprite>
+	</Button>
+	<!--取消-->
+	<Button position="240,160" name="cancel_btn">
+		<properties>
+			<property name="normal-image" value="sbt4_1.png"/>
+			<property name="selected-image" value="sbt4_2.png"/>
+			<property name="disabled-image" value="sbt4_3.png"/>
+			<property name="res-type" value="XML"/>
+			<property name="priority" value="-4"/>
+		</properties>
+		<Sprite position="33,16">
+			<properties>
+				<property name="filename" value="cancel_text.png"/>
+				<property name="res-type" value="XML"/>
+			</properties>
+		</Sprite>
+	</Button>
+</Layer>
