@@ -1,3 +1,38 @@
-﻿  FarmScene.cpp
+﻿  Crop.cpp
+d:\coding\cplusplus\farm\classes\crop.cpp(48): warning C4244: “=”: 从“time_t”转换到“int”，可能丢失数据
+d:\coding\cplusplus\farm\classes\crop.cpp(49): warning C4244: “=”: 从“time_t”转换到“int”，可能丢失数据
+d:\coding\cplusplus\farm\classes\crop.cpp(50): warning C4244: “=”: 从“time_t”转换到“int”，可能丢失数据
+d:\coding\cplusplus\farm\classes\crop.cpp(190): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+  CropLayer.cpp
+  CSVLoader.cpp
+  DynamicData.cpp
+d:\coding\cplusplus\farm\classes\dynamicdata.cpp(251): warning C4244: “初始化”: 从“time_t”转换到“int”，可能丢失数据
+  EffectLayer.cpp
+  Entity.cpp
+  FarmScene.cpp
 d:\coding\cplusplus\farm\classes\farmscene.cpp(378): warning C4244: “参数”: 从“time_t”转换到“int”，可能丢失数据
+  FarmUILayer.cpp
+d:\coding\cplusplus\farm\classes\farmuilayer.cpp(143): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+d:\coding\cplusplus\farm\classes\farmuilayer.cpp(294): warning C4244: “初始化”: 从“time_t”转换到“int”，可能丢失数据
+d:\coding\cplusplus\farm\classes\farmuilayer.cpp(295): warning C4244: “初始化”: 从“time_t”转换到“int”，可能丢失数据
+d:\coding\cplusplus\farm\classes\farmuilayer.cpp(296): warning C4244: “初始化”: 从“time_t”转换到“int”，可能丢失数据
+  Fruit.cpp
+  GoodLayer.cpp
+  HelloWorldScene.cpp
+d:\coding\cplusplus\farm\classes\helloworldscene.cpp : warning C4828: 文件包含在偏移 0x3aa 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+d:\coding\cplusplus\farm\classes\helloworldscene.cpp : warning C4828: 文件包含在偏移 0x3ab 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+d:\coding\cplusplus\farm\classes\helloworldscene.cpp : warning C4828: 文件包含在偏移 0x3ad 处开始的字符，该字符在当前源字符集中无效(代码页 65001)。
+  main.cpp
+  Seed.cpp
+  SliderDialog.cpp
+d:\coding\cplusplus\farm\classes\sliderdialog.cpp(55): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+d:\coding\cplusplus\farm\classes\sliderdialog.cpp(71): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+  Soil.cpp
+  SoilLayer.cpp
+d:\coding\cplusplus\farm\classes\soillayer.cpp(56): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+d:\coding\cplusplus\farm\classes\soillayer.cpp(76): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+  StaticData.cpp
+  TextDialog.cpp
+  Toast.cpp
+  正在生成代码...
   Farm.vcxproj -> D:\coding\CPlusPlus\Farm\Debug\Farm.exe
